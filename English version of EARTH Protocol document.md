@@ -364,11 +364,11 @@ A `DeployContract` contains 2 parameters:
 * Inventory is mainly used to inform peer nodes the list of items.
 
   `Inventory` contains `type` and `ids`.  
-  `type`: what type this `Inventory` is. – e.g. _0_ stands for `TRX`.  
+  `type`: what type this `Inventory` is. – e.g. _0_ stands for `EARTH`.  
   `ids`: ID of things in this `Inventory`.
 
-  Two `Inventory` types: `TRX` and `BLOCK`.  
-  `TRX`: transaction.  
+  Two `Inventory` types: `EARTH` and `BLOCK`.  
+  `EARTH`: transaction.  
   `BLOCK`: block.
 
       // Inventory 
