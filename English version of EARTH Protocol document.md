@@ -209,7 +209,7 @@ An `AssetIssueContract` contains 11 parameters:
  `owner_address`: the address for contract owner – e.g. “_0xu82h…7237_”.  
  `name`: the name for this contract – e.g. “Billscontract”.  
  `total_supply`: the maximum supply of this asset – e.g. _1000000000_.  
- `trx_num`: the number of EARTHIX – e.g._232241_.  
+ `earth_num`: the number of EARTHIX – e.g._232241_.  
  `num`: number of corresponding asset.  
  `start_time`: the starting date of this contract – e.g._20170312_.  
  `end_time`: the expiring date of this contract – e.g. _20170512_.  
@@ -221,7 +221,7 @@ An `AssetIssueContract` contains 11 parameters:
          bytes owner_address = 1; 
          bytes name = 2; 
          int64 total_supply = 4; 
-         int32 trx_num = 6; 
+         int32 earth_num = 6; 
          int32 num = 8; 
          int64 start_time = 9; 
          int64 end_time = 10; 
