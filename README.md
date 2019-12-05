@@ -1,13 +1,3 @@
-# protocol [![Build Status](https://travis-ci.org/tronprotocol/protocol.svg?branch=master)](https://travis-ci.org/tronprotocol/protocol)
+# The EARTH Protocol
 
-
-# The protocol of Tron including api and message.
-
-The protocol is an independent project. You can use it for building other application. 
-
-java-tron, wallet-cli and grpc-gateway
-
-git subtree pull --prefix src/main/protos/ protocol master
-
-## Run the included *.sh files to initialize the dependencies
-
+Used for building `java-earth`, `wallet-cli` and `grpc-gateway`. Run the included \*.sh files to initialize the dependencies
