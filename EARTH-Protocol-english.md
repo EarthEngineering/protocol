@@ -977,3 +977,7 @@ message Neighbours {
   int64 timestamp = 3;
 }
 ```
+
+## Credit
+
+Thank you to the [TRON team](https://tron.network) for the inspiration and [great code](https://github.com/tronprotocol/protocol/blob/master/English%20version%20of%20TRON%20Protocol%20document.md)!
