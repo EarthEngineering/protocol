@@ -105,7 +105,7 @@ enum AccountType {
 
 An `Account` contains 7 parameters:
 
-- `account_name`: the name for this account – e.g. “_BillsAccount_”.
+- `account_name`: the name for this account – e.g. “_GabrielsAccount_”.
 - `type`: what type of this account is – e.g. _0_ stands for type `Normal`.
 - `balance`: balance of this account – e.g. _4213312_.
 - `votes`: received votes on this account – e.g. _{(“0x1b7w…9xj3”,323), (“0x8djq…j12m”,88),…,(“0x82nd…mx6i”,10001)}_.
