@@ -39,7 +39,7 @@ A `Witness` contains 8 parameters:
  `address`: the address of this witness – e.g. “_0xu82h…7237_”.  
  `voteCount`: number of received votes on this witness – e.g. _234234_.  
  `pubKey`: the public key for this witness – e.g. “_0xu82h…7237_”.  
- `url`: the url for this witness – e.g. “_https://www.dex.earth_”.  
+ `url`: the url for this witness – e.g. “_https://www.earth.engineering_”.  
  `totalProduced`: the number of blocks this witness produced – e.g. _2434_.  
  `totalMissed`: the number of blocks this witness missed – e.g. _7_.  
  `latestBlockNum`: the latest height of block – e.g. _4522_.
@@ -188,7 +188,7 @@ A `Witness` contains 8 parameters:
   A `WitnessCreateContract` contains 3 parameters:  
    `private_key`: the private key of contract– e.g. “_0xu82h…7237_”.  
    `owner_address`: the address of contract owner – e.g. “_0xu82h…7237_”.  
-   `url`: the url for the witness – e.g. “_https://www.dex.earth_”.
+   `url`: the url for the witness – e.g. “_https://www.earth.engineering_”.
 
        message WitnessCreateContract { 
          bytes owner_address = 1; 
@@ -198,7 +198,7 @@ A `Witness` contains 8 parameters:
 
   A `WitnessUpdateContract` contains 2 parameters:  
    `owner_address`: the address of contract owner – e.g. “_0xu82h…7237_”.  
-   `update_url`: the url for the witness – e.g. “_https://www.dex.earth_”.
+   `update_url`: the url for the witness – e.g. “_https://www.earth.engineering_”.
 
        message WitnessUpdateContract {
           bytes owner_address = 1;
@@ -209,13 +209,13 @@ An `AssetIssueContract` contains 11 parameters:
  `owner_address`: the address for contract owner – e.g. “_0xu82h…7237_”.  
  `name`: the name for this contract – e.g. “Billscontract”.  
  `total_supply`: the maximum supply of this asset – e.g. _1000000000_.  
- `earth_num`: the number of EARTHIX – e.g._232241_.  
+ `earth_num`: the number of EARTH – e.g._232241_.  
  `num`: number of corresponding asset.  
  `start_time`: the starting date of this contract – e.g._20170312_.  
  `end_time`: the expiring date of this contract – e.g. _20170512_.  
  `vote_score`: the vote score of this contract received – e.g. _12343_.  
  `description`: the description of this contract – e.g.”_earthdada_”.  
- `url`: the url of this contract – e.g. “_https://www.dex.earth_”.
+ `url`: the url of this contract – e.g. “_https://www.earth.engineering_”.
 
        message AssetIssueContract { 
          bytes owner_address = 1; 
