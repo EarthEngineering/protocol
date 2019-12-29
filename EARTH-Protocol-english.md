@@ -109,7 +109,7 @@ An `Account` contains 7 parameters:
 - `type`: what type of this account is – e.g. _0_ stands for type `Normal`.
 - `balance`: balance of this account – e.g. _4213312_.
 - `votes`: received votes on this account – e.g. _{(“0x1b7w…9xj3”,323), (“0x8djq…j12m”,88),…,(“0x82nd…mx6i”,10001)}_.
-- `asset`: other assets expect EARTH in this account – e.g. _{<“WishToken”,66666>,<”Dogie”,233>}_.
+- `asset`: other assets expect EARTH in this account – e.g. _{<“ExampleToken”,507>,<”OtherToken”,705>}_.
 - `latest_operation_time`: the latest operation time of this account.
 
 ```protobuf
@@ -248,7 +248,7 @@ Transaction contracts mainly includes
 An `AccountCreateContract` contains 3 parameters:
 
 - `type`: What type this account is – e.g. _0_ stands for `Normal`.
-- `account_name`: the name for this account – e.g.”_Billsaccount_”.
+- `account_name`: the name for this account – e.g.”_Gabrielsaccount_”.
 - `owner_address`: the address of contract owner – e.g. “_0xu82h…7237_”.
 
 ```protobuf
@@ -263,7 +263,7 @@ message AccountCreateContract {
 
 A `AccountUpdateContract` contains 2 paremeters:
 
-- `account_name`: the name for this account – e.g.”\_Billsaccount\*”.
+- `account_name`: the name for this account – e.g.”\_Gabrielsaccount\*”.
 - `owner_address`: the address of contract owner – e.g. “_0xu82h…7237_”.
 
 ```protobuf
@@ -293,7 +293,7 @@ message TransferContract {
 
 A `TransferAssetContract` contains 4 parameters:
 
-- `asset_name`: the name for asset – e.g.”_Billsaccount_”.
+- `asset_name`: the name for asset – e.g.”_Gabrielsaccount_”.
 - `to_address`: the receiver address – e.g. “_0xu82h…7237_”.
 - `owner_address`: the address of contract owner – e.g. “_0xu82h…7237_”.
 - `amount`: the amount of target asset - e.g._12353_.
@@ -378,7 +378,7 @@ message WitnessUpdateContract {
 An `AssetIssueContract` contains 11 parameters:
 
 - `owner_address`: the address for contract owner – e.g. “_0xu82h…7237_”.
-- `name`: the name for this contract – e.g. “Billscontract”.
+- `name`: the name for this contract – e.g. “Gabrielscontract”.
 - `total_supply`: the maximum supply of this asset – e.g. _1000000000_.
 - `earth_num`: the number of EARTH – e.g._232241_.
 - `num`: number of corresponding asset.
@@ -981,7 +981,7 @@ The message structure of UDP.
 
 ## Endpoint
 
-`Endpoint`: the storage structure of nodes' information.
+The storage structure of nodes' information.
 
 message`Endpoint` contains 3 parameters:
 
@@ -999,7 +999,7 @@ message Endpoint {
 
 ## PingMessage
 
-`PingMessage`: the message sent from one node to another in the connecting process.
+The message sent from one node to another in the connecting process.
 
 message`PingMessage` contains 4 parameters:
 
@@ -1019,7 +1019,7 @@ message PingMessage {
 
 ## PongMessage
 
-`PongMessage`: the message implies that nodes are connected.
+The message implies that nodes are connected.
 
 message`PongMessage` contains 3 parameters:
 
@@ -1037,7 +1037,7 @@ message PongMessage {
 
 ## FindNeighbours
 
-`FindNeighbours`: the message sent from one node to find another one.
+The message sent from one node to find another one.
 
 message`FindNeighbours` contains 3 parameters:
 
@@ -1055,7 +1055,7 @@ message FindNeighbours {
 
 ## FindNeighbour
 
-`FindNeighbour`: the message replied by the neighbour node.
+The message replied by the neighbour node.
 
 message`Neighbours` contains 3 parameters:
 
