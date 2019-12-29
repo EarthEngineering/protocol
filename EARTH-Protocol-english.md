@@ -95,9 +95,10 @@ A `Witness` contains 8 parameters:
 
 A block typically contains transaction data and a blockheader, which is a list of basic block information, including timestamp, signature, parent hash, root of Merkle tree and so on.
 
-A block contains `transactions` and a `block_header`.  
- `transactions`: transaction data of this block.  
- `block_header`: one part of a block.
+A block contains `transactions` and a `block_header`.
+
+- `transactions`: transaction data of this block.
+- `block_header`: one part of a block.
 
 ```protobuf
 // block
@@ -109,17 +110,19 @@ message Block {
 
 ## Blockheader
 
-A `BlockHeader` contains `raw_data` and `witness_signature`.  
- `raw_data`: a `raw` message.  
- `witness_signature`: signature for this block header from witness node.
+A `BlockHeader` contains `raw_data` and `witness_signature`.
 
-A message `raw` contains 6 parameters:  
- `timestamp`: timestamp of this message – e.g. _14356325_.  
- `txTrieRoot`: the root of Merkle Tree in this block – e.g. “_7dacsa…3ed_.”  
- `parentHash`: the hash of last block – e.g. “_7dacsa…3ed_.”  
- `number`: the height of this block – e.g. _13534657_.  
- `witness_id`: the id of witness which packed this block – e.g. “_0xu82h…7237_”.  
- `witness_address`: the adresss of the witness packed this block – e.g. “_0xu82h…7237_”.
+- `raw_data`: a `raw` message.
+- `witness_signature`: signature for this block header from witness node.
+
+A message `raw` contains 6 parameters:
+
+- `timestamp`: timestamp of this message – e.g. _14356325_.
+- `txTrieRoot`: the root of Merkle Tree in this block – e.g. “_7dacsa…3ed_.”
+- `parentHash`: the hash of last block – e.g. “_7dacsa…3ed_.”
+- `number`: the height of this block – e.g. _13534657_.
+- `witness_id`: the id of witness which packed this block – e.g. “_0xu82h…7237_”.
+- `witness_address`: the adresss of the witness packed this block – e.g. “_0xu82h…7237_”.
 
 ```protobuf
 message BlockHeader {
@@ -139,12 +142,14 @@ message BlockHeader {
 ```
 
 message `ChainInventory` contains `BlockId` and `remain_num`.
-`BlockId`: the identification of block.
-`remain_num`：the remain number of blocks in the synchronizing process.
+
+- `BlockId`: the identification of block.
+- `remain_num`：the remain number of blocks in the synchronizing process.
 
 A `BlockId` contains 2 parameters:
-`hash`: the hash of block.
-`number`: the hash and height of block.
+
+- `hash`: the hash of block.
+- `number`: the hash and height of block.
 
 ```protobuf
 message ChainInventory {
@@ -162,9 +167,10 @@ message ChainInventory {
 Transaction contracts mainly includes account create contract, account update contract, transfer contract, transfer asset contract, vote asset contract, vote witness contract, witness creation contract, witness update contract, asset issue contract, participate asset issue contract and deploy contract.
 
 An `AccountCreateContract` contains 3 parameters:
-`type`: What type this account is – e.g. _0_ stands for `Normal`.
-`account_name`: the name for this account – e.g.”_Billsaccount_”.
-`owner_address`: the address of contract owner – e.g. “_0xu82h…7237_”.
+
+- `type`: What type this account is – e.g. _0_ stands for `Normal`.
+- `account_name`: the name for this account – e.g.”_Billsaccount_”.
+- `owner_address`: the address of contract owner – e.g. “_0xu82h…7237_”.
 
 ```protobuf
 message AccountCreateContract {
@@ -175,8 +181,9 @@ message AccountCreateContract {
 ```
 
 A `AccountUpdateContract` contains 2 paremeters:
-`account_name`: the name for this account – e.g.”\_Billsaccount\*”.
-`owner_address`: the address of contract owner – e.g. “_0xu82h…7237_”.
+
+- `account_name`: the name for this account – e.g.”\_Billsaccount\*”.
+- `owner_address`: the address of contract owner – e.g. “_0xu82h…7237_”.
 
 ```protobuf
 message AccountUpdateContract {
@@ -186,9 +193,10 @@ message AccountUpdateContract {
 ```
 
 A `TransferContract` contains 3 parameters:
-`amount`: the amount of EARTH – e.g. _12534_.
-`to_address`: the receiver address – e.g. “_0xu82h…7237_”.
-`owner_address`: the address of contract owner – e.g. “_0xu82h…7237_”.
+
+- `amount`: the amount of EARTH – e.g. _12534_.
+- `to_address`: the receiver address – e.g. “_0xu82h…7237_”.
+- `owner_address`: the address of contract owner – e.g. “_0xu82h…7237_”.
 
 ```protobuf
 message TransferContract {
@@ -199,10 +207,11 @@ message TransferContract {
 ```
 
 A `TransferAssetContract` contains 4 parameters:
-`asset_name`: the name for asset – e.g.”_Billsaccount_”.
-`to_address`: the receiver address – e.g. “_0xu82h…7237_”.
-`owner_address`: the address of contract owner – e.g. “_0xu82h…7237_”.
-`amount`: the amount of target asset - e.g._12353_.
+
+- `asset_name`: the name for asset – e.g.”_Billsaccount_”.
+- `to_address`: the receiver address – e.g. “_0xu82h…7237_”.
+- `owner_address`: the address of contract owner – e.g. “_0xu82h…7237_”.
+- `amount`: the amount of target asset - e.g._12353_.
 
 ```protobuf
 message TransferAssetContract {
@@ -214,10 +223,11 @@ message TransferAssetContract {
 ```
 
 A `VoteAssetContract` contains 4 parameters:
-`vote_address`: the voted address of the asset.
-`support`: is the votes supportive or not – e.g. _true_.
-`owner_address`: the address of contract owner – e.g. “_0xu82h…7237_”.
-`count`: the count number of votes- e.g. _2324234_.
+
+- `vote_address`: the voted address of the asset.
+- `support`: is the votes supportive or not – e.g. _true_.
+- `owner_address`: the address of contract owner – e.g. “_0xu82h…7237_”.
+- `count`: the count number of votes- e.g. _2324234_.
 
 ```protobuf
 message VoteAssetContract {
@@ -229,10 +239,11 @@ message VoteAssetContract {
 ```
 
 A `VoteWitnessContract` contains 4 parameters:
-`vote_address`: the addresses of those who voted.
-`support`: is the votes supportive or not - e.g. _true_.
-`owner_address`: the address of contract owner – e.g. “_0xu82h…7237_”.
-`count`: - e.g. the count number of vote – e.g. _32632_.
+
+- `vote_address`: the addresses of those who voted.
+- `support`: is the votes supportive or not - e.g. _true_.
+- `owner_address`: the address of contract owner – e.g. “_0xu82h…7237_”.
+- `count`: - e.g. the count number of vote – e.g. _32632_.
 
 ```protobuf
 message VoteWitnessContract {
@@ -244,9 +255,10 @@ message VoteWitnessContract {
 ```
 
 A `WitnessCreateContract` contains 3 parameters:
-`private_key`: the private key of contract– e.g. “_0xu82h…7237_”.
-`owner_address`: the address of contract owner – e.g. “_0xu82h…7237_”.
-`url`: the url for the witness – e.g. “_https://www.earth.engineering_”.
+
+- `private_key`: the private key of contract– e.g. “_0xu82h…7237_”.
+- `owner_address`: the address of contract owner – e.g. “_0xu82h…7237_”.
+- `url`: the url for the witness – e.g. “_https://www.earth.engineering_”.
 
 ```protobuf
 message WitnessCreateContract {
@@ -257,8 +269,9 @@ message WitnessCreateContract {
 ```
 
 A `WitnessUpdateContract` contains 2 parameters:
-`owner_address`: the address of contract owner – e.g. “_0xu82h…7237_”.
-`update_url`: the url for the witness – e.g. “_https://www.earth.engineering_”.
+
+- `owner_address`: the address of contract owner – e.g. “_0xu82h…7237_”.
+- `update_url`: the url for the witness – e.g. “_https://www.earth.engineering_”.
 
 ```protobuf
 message WitnessUpdateContract {
@@ -268,16 +281,17 @@ message WitnessUpdateContract {
 ```
 
 An `AssetIssueContract` contains 11 parameters:
-`owner_address`: the address for contract owner – e.g. “_0xu82h…7237_”.
-`name`: the name for this contract – e.g. “Billscontract”.
-`total_supply`: the maximum supply of this asset – e.g. _1000000000_.
-`earth_num`: the number of EARTH – e.g._232241_.
-`num`: number of corresponding asset.
-`start_time`: the starting date of this contract – e.g._20170312_.
-`end_time`: the expiring date of this contract – e.g. _20170512_.
-`vote_score`: the vote score of this contract received – e.g. _12343_.
-`description`: the description of this contract – e.g.”_earthdada_”.
-`url`: the url of this contract – e.g. “_https://www.earth.engineering_”.
+
+- `owner_address`: the address for contract owner – e.g. “_0xu82h…7237_”.
+- `name`: the name for this contract – e.g. “Billscontract”.
+- `total_supply`: the maximum supply of this asset – e.g. _1000000000_.
+- `earth_num`: the number of EARTH – e.g._232241_.
+- `num`: number of corresponding asset.
+- `start_time`: the starting date of this contract – e.g._20170312_.
+- `end_time`: the expiring date of this contract – e.g. _20170512_.
+- `vote_score`: the vote score of this contract received – e.g. _12343_.
+- `description`: the description of this contract – e.g.”_earthdada_”.
+- `url`: the url of this contract – e.g. “_https://www.earth.engineering_”.
 
 ```protobuf
 message AssetIssueContract {
@@ -295,10 +309,11 @@ message AssetIssueContract {
 ```
 
 A `ParticipateAssetIssueContract` contains 4 parameters:
-`owner_address`: the address for contract owner – e.g. “_0xu82h…7237_”.
-`to_address`: the receiver address – e.g. “_0xu82h…7237_”.
-`asset_name`: the name of target asset.
-`amount`: the amount of drops.
+
+- `owner_address`: the address for contract owner – e.g. “_0xu82h…7237_”.
+- `to_address`: the receiver address – e.g. “_0xu82h…7237_”.
+- `asset_name`: the name of target asset.
+- `amount`: the amount of drops.
 
 ```protobuf
 message ParticipateAssetIssueContract {
@@ -310,8 +325,9 @@ message ParticipateAssetIssueContract {
 ```
 
 A `DeployContract` contains 2 parameters:
-`script`: the script of this contract.
-`owner_address`: the address for contract owner – e.g. “_0xu82h…7237_”.
+
+- `script`: the script of this contract.
+- `owner_address`: the address for contract owner – e.g. “_0xu82h…7237_”.
 
 ```protobuf
 message DeployContract {
@@ -391,8 +407,9 @@ message TXOutputs {
 ```
 
 message `TXOutput` contains `value` and `pubKeyHash`.
-`value`: output value.
-`pubKeyHash`: Hash of public key
+
+- `value`: output value.
+- `pubKeyHash`: Hash of public key
 
 ```protobuf
 message TXOutput {
@@ -402,13 +419,15 @@ message TXOutput {
 ```
 
 message `TXInput` contains `raw_data` and `signature`.
-`raw_data`: a message `raw`.
-`signature`: signature for this `TXInput`.
+
+- `raw_data`: a message `raw`.
+- `signature`: signature for this `TXInput`.
 
 message `raw` contains `txID`, `vout` and `pubKey`.
-`txID`: transaction ID.
-`vout`: value of last output.
-`pubKey`: public key.
+
+- `txID`: transaction ID.
+- `vout`: value of last output.
+- `pubKey`: public key.
 
 ```protobuf
 message TXInput {
@@ -423,8 +442,9 @@ message TXInput {
 ```
 
 message `Result` contains `fee` and `ret`.
-`ret`: the state of transaction.
-`fee`: the fee for transaction.
+
+- `ret`: the state of transaction.
+- `fee`: the fee for transaction.
 
 `code` is definition of `ret` and contains 2 types：`SUCCESS` and `FAILED`.
 
@@ -444,12 +464,14 @@ message Result {
 Inventory is mainly used to inform peer nodes the list of items.
 
 `Inventory` contains `type` and `ids`.
-`type`: what type this `Inventory` is. – e.g. _0_ stands for `EARTH`.
-`ids`: ID of things in this `Inventory`.
+
+- `type`: what type this `Inventory` is. – e.g. _0_ stands for `EARTH`.
+- `ids`: ID of things in this `Inventory`.
 
 Two `Inventory` types: `EARTH` and `BLOCK`.
-`EARTH`: transaction.
-`BLOCK`: block.
+
+- `EARTH`: transaction.
+- `BLOCK`: block.
 
 ```protobuf
 // Inventory
@@ -464,16 +486,18 @@ message Inventory {
 ```
 
 message `Items` contains 4 parameters:
-`type`: type of items – e.g. _1_ stands for `EARTH`.
-`blocks`: blocks in `Items` if there is any.
-`block_headers`: block headers if there is any.
-`transactions`: transactions if there is any.
+
+- `type`: type of items – e.g. _1_ stands for `EARTH`.
+- `blocks`: blocks in `Items` if there is any.
+- `block_headers`: block headers if there is any.
+- `transactions`: transactions if there is any.
 
 `Items` have four types: `ERR`, `EARTH`, `BLOCK` and `BLOCKHEADER`.
-`ERR`: error.
-`EARTH`: transaction.
-`BLOCK`: block.
-`BLOCKHEADER`: block header.
+
+- `ERR`: error.
+- `EARTH`: transaction.
+- `BLOCK`: block.
+- `BLOCKHEADER`: block header.
 
 ```protobuf
 message Items {
@@ -492,8 +516,9 @@ message Items {
 ```
 
 `InventoryItems` contains `type` and `items`.
-`type`: what type of item.
-`items`: items in an `InventoryItems`.
+
+- `type`: what type of item.
+- `items`: items in an `InventoryItems`.
 
 ```protobuf
 message InventoryItems {
@@ -519,12 +544,14 @@ message BlockInventory {
 ```
 
 message `BlockId` contains `ids` and `type`.
-`ids`: the identification of block.
-`type`: what type of the block.
+
+- `ids`: the identification of block.
+- `type`: what type of the block.
 
 `ids` contains 2 paremeters:
-`hash`: the hash of block.
-`number`: the hash and height of block.
+
+- `hash`: the hash of block.
+- `number`: the hash and height of block.
 
 ```protobuf
 message BlockId {
@@ -577,13 +604,15 @@ enum ReasonCode {
 ```
 
 message`DisconnectMessage` contains `reason`.
-`DisconnectMessage`: the message when disconnection occurs.
-`reason`: the reason for disconnecting.
+
+- `DisconnectMessage`: the message when disconnection occurs.
+- `reason`: the reason for disconnecting.
 
 message`HelloMessage` contains 2 parameters:
-`HelloMessage`: the message for building connection.
-`from`: the nodes that request for building connection.
-`version`: the version when connection is built.
+
+- `HelloMessage`: the message for building connection.
+- `from`: the nodes that request for building connection.
+- `version`: the version when connection is built.
 
 ## Wallet Service RPC and blockchain explorer
 
@@ -746,7 +775,8 @@ service Wallet {
 
 `AccountList`: the list of acounts in the blockchain explorer.
 message `AccountList` contains one parameter:
-`account`:
+
+- `account`:
 
 ```protobuf
 message AccountList {
@@ -756,7 +786,8 @@ message AccountList {
 
 `WitnessList`: the list of witnesses in the blockchain explorer.
 message `WitnessList` contains one parameter:
-`witnesses`:
+
+- `witnesses`:
 
 ```protobuf
 message WitnessList {
@@ -766,7 +797,8 @@ message WitnessList {
 
 `AssetIssueList`: the list of issue asset in the blockchain explorer.
 message `AssetIssueList` contains one parameter:
-`assetIssue`:
+
+- `assetIssue`:
 
 ```protobuf
 message AssetIssueList {
@@ -776,7 +808,8 @@ message AssetIssueList {
 
 `NodeList`: the list of nodes in the node distribution map.
 message `NodeList` contains one parameter:
-`nodes`:
+
+- `nodes`:
 
 ```protobuf
 message NodeList {
@@ -786,8 +819,9 @@ message NodeList {
 
 `Address`: the address of nodes.
 message`Address` contains 2 parameters:
-`host`: the host of nodes.
-`port`: the port number of nodes.
+
+- `host`: the host of nodes.
+- `port`: the port number of nodes.
 
 ```protobuf
 message Address {
@@ -797,7 +831,8 @@ message Address {
 ```
 
 message `Return` has only one parameter:
-`result`: a bool flag.
+
+- `result`: a bool flag.
 
 ```protobuf
 message `Return` {
@@ -805,13 +840,14 @@ message `Return` {
 }
 ```
 
-- The message structure of UDP.
+## The message structure of UDP.
 
-  `Endpoint`: the storage structure of nodes' information.
-  message`Endpoint` contains 3 parameters:
-  `address`: the address of nodes.
-  `port`: the port number.
-  `nodeId`:the ID of nodes.
+`Endpoint`: the storage structure of nodes' information.
+message`Endpoint` contains 3 parameters:
+
+- `address`: the address of nodes.
+- `port`: the port number.
+- `nodeId`:the ID of nodes.
 
 ```protobuf
 message Endpoint {
@@ -823,10 +859,11 @@ message Endpoint {
 
 `PingMessage`: the message sent from one node to another in the connecting process.
 message`PingMessage` contains 4 parameters:
-`from`: which node does the message send from.
-`to`: which node will the message send to.
-`version`: the version of the Internet.
-`timestamp`: the timestamp of message.
+
+- `from`: which node does the message send from.
+- `to`: which node will the message send to.
+- `version`: the version of the Internet.
+- `timestamp`: the timestamp of message.
 
 ```protobuf
 message PingMessage {
@@ -839,9 +876,10 @@ message PingMessage {
 
 `PongMessage`: the message implies that nodes are connected.
 message`PongMessage` contains 3 parameters:
-`from`: which node does the message send from.
-`echo`:
-`timestamp`: the timestamp of message.
+
+- `from`: which node does the message send from.
+- `echo`:
+- `timestamp`: the timestamp of message.
 
 ```protobuf
 message PongMessage {
@@ -853,9 +891,10 @@ message PongMessage {
 
 `FindNeighbours`: the message sent from one node to find another one.
 message`FindNeighbours` contains 3 parameters:
-`from`: which node does the message send from.
-`targetId`: the ID of targeted node.
-`timestamp`: the timestamp of message.
+
+- `from`: which node does the message send from.
+- `targetId`: the ID of targeted node.
+- `timestamp`: the timestamp of message.
 
 ```protobuf
 message FindNeighbours {
@@ -867,9 +906,10 @@ message FindNeighbours {
 
 `FindNeighbour`: the message replied by the neighbour node.
 message`Neighbours` contains 3 parameters:
-`from`: which node does the message send from.
-`neighbours`: the neighbour node.
-`timestamp`: the timestamp of message.
+
+- `from`: which node does the message send from.
+- `neighbours`: the neighbour node.
+- `timestamp`: the timestamp of message.
 
 ```protobuf
 message Neighbours {
