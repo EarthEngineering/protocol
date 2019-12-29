@@ -813,7 +813,7 @@ service WalletExtension {
   }
 };
 
-// the api of tron's db
+// the api of earth's db
 service Database {
   // for tapos
   rpc getBlockReference (EmptyMessage) returns (BlockReference) {
@@ -857,7 +857,7 @@ message BlockReference {
   bytes block_hash = 2;
 }
 
-// the api of tron's network such as node list.
+// the api of earth's network such as node list.
 service Network {
 
 };
