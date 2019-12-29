@@ -164,7 +164,21 @@ message ChainInventory {
 
 ## Transaction
 
-Transaction contracts mainly includes account create contract, account update contract, transfer contract, transfer asset contract, vote asset contract, vote witness contract, witness creation contract, witness update contract, asset issue contract, participate asset issue contract and deploy contract.
+Transaction contracts mainly includes
+
+- account create contract
+- account update contract
+- transfer contract
+- transfer asset contract
+- vote asset contract
+- vote witness contract
+- witness creation contract
+- witness update contract
+- asset issue contract
+- participate asset issue contract
+- deploy contract
+
+### AccountCreateContract
 
 An `AccountCreateContract` contains 3 parameters:
 
@@ -180,6 +194,8 @@ message AccountCreateContract {
 }
 ```
 
+### AccountUpdateContract
+
 A `AccountUpdateContract` contains 2 paremeters:
 
 - `account_name`: the name for this account – e.g.”\_Billsaccount\*”.
@@ -191,6 +207,8 @@ message AccountUpdateContract {
   bytes owner_address = 2;
 }
 ```
+
+### TransferContract
 
 A `TransferContract` contains 3 parameters:
 
@@ -205,6 +223,8 @@ message TransferContract {
   int64 amount = 3;
 }
 ```
+
+### TransferAssetContract
 
 A `TransferAssetContract` contains 4 parameters:
 
@@ -222,6 +242,8 @@ message TransferAssetContract {
  }
 ```
 
+### VoteAssetContract
+
 A `VoteAssetContract` contains 4 parameters:
 
 - `vote_address`: the voted address of the asset.
@@ -237,6 +259,8 @@ message VoteAssetContract {
   int32 count = 5;
  }
 ```
+
+### VoteWitnessContract
 
 A `VoteWitnessContract` contains 4 parameters:
 
@@ -254,6 +278,8 @@ message VoteWitnessContract {
  }
 ```
 
+### WitnessCreateContract
+
 A `WitnessCreateContract` contains 3 parameters:
 
 - `private_key`: the private key of contract– e.g. “_0xu82h…7237_”.
@@ -268,6 +294,8 @@ message WitnessCreateContract {
  }
 ```
 
+### WitnessUpdateContract
+
 A `WitnessUpdateContract` contains 2 parameters:
 
 - `owner_address`: the address of contract owner – e.g. “_0xu82h…7237_”.
@@ -279,6 +307,8 @@ message WitnessUpdateContract {
    bytes update_url = 12;
  }
 ```
+
+### AssetIssueContract
 
 An `AssetIssueContract` contains 11 parameters:
 
@@ -308,6 +338,8 @@ message AssetIssueContract {
 }
 ```
 
+### ParticipateAssetIssueContract
+
 A `ParticipateAssetIssueContract` contains 4 parameters:
 
 - `owner_address`: the address for contract owner – e.g. “_0xu82h…7237_”.
@@ -324,6 +356,8 @@ message ParticipateAssetIssueContract {
 }
 ```
 
+### DeployContract
+
 A `DeployContract` contains 2 parameters:
 
 - `script`: the script of this contract.
@@ -336,29 +370,44 @@ message DeployContract {
 }                       t
 ```
 
-- Each transaction contains several TXInputs, TXOutputs and other related qualities.
-  Input, transaction and head block all require signature.
+Each transaction contains several TXInputs, TXOutputs and other related qualities. Input, transaction and head block all require signature.
 
-       message `Transaction` contains `raw_data` and `signature`.
-       `raw_data`: message `raw`.
-       `signature`: signatures form all input nodes.
+message `Transaction` contains `raw_data` and `signature`.
 
-      `raw` contains 8 parameters:
-      `type`: the transaction type of `raw` message.
-      `vin`: input values.
-      `vout`: output values.
-      `expiration`: the expiration date of transaction – e.g._20170312_.
-      `data`: data.
-      `contract`: contracts in this transaction.
-      `scripts`:scripts in the transaction.
-      `timestamp`: timestamp of this raw data – e.g. _14356325_.
+- `raw_data`: message `raw`.
+- `signature`: signatures form all input nodes.
 
-      message `Contract` contains `type` and `parameter`.
-      `type`: what type of the message contract.
-      `parameter`: It can be any form.
+`raw` contains 8 parameters:
 
-      There are 8 different of contract types: `AccountCreateContract`, `TransferContract`, `TransferAssetContract`, `VoteAssetContract`, `VoteWitnessContract`,`WitnessCreateContract`, `AssetIssueContract` and `DeployContract`.
-      `TransactionType` have two types: `UtxoType` and `ContractType`.
+- `type`: the transaction type of `raw` message.
+- `vin`: input values.
+- `vout`: output values.
+- `expiration`: the expiration date of transaction – e.g._20170312_.
+- `data`: data.
+- `contract`: contracts in this transaction.
+- `scripts`:scripts in the transaction.
+- `timestamp`: timestamp of this raw data – e.g. _14356325_.
+
+message `Contract` contains `type` and `parameter`.
+
+- `type`: what type of the message contract.
+- `parameter`: It can be any form.
+
+There are 8 different of contract types:
+
+- `AccountCreateContract`
+- `TransferContract`
+- `TransferAssetContract`
+- `VoteAssetContract`
+- `VoteWitnessContract`
+- `WitnessCreateContract`
+- `AssetIssueContract`
+- `DeployContract`
+
+`TransactionType` have two types:
+
+- `UtxoType`
+- `ContractType`
 
 ```protobuf
 message Transaction {
@@ -398,7 +447,8 @@ message Transaction {
 ```
 
 message `TXOutputs` contains `outputs`.
-`outputs`: an array of `TXOutput`.
+
+- `outputs`: an array of `TXOutput`.
 
 ```protobuf
 message TXOutputs {
@@ -446,7 +496,10 @@ message `Result` contains `fee` and `ret`.
 - `ret`: the state of transaction.
 - `fee`: the fee for transaction.
 
-`code` is definition of `ret` and contains 2 types：`SUCCESS` and `FAILED`.
+`code` is definition of `ret` and contains 2 types：
+
+- `SUCCESS`
+- `FAILED`
 
 ```protobuf
 message Result {
@@ -528,9 +581,14 @@ message InventoryItems {
 ```
 
 message `BlockInventory` contains `type`.
-`type`: what type of inventory.
 
-There are 3 types:`SYNC`, `ADVTISE`, `FETCH`.
+- `type`: what type of inventory.
+
+There are 3 types:
+
+- `SYNC`
+- `ADVTISE`
+- `FETCH`
 
 ```protobuf
 // Inventory
@@ -700,80 +758,52 @@ Check out the total transaction.
 
 ```protobuf
 service Wallet {
-  rpc GetAccount (Account) returns (Account) {
-  };
+  rpc GetAccount (Account) returns (Account) {};
 
-  rpc CreateTransaction (TransferContract) returns (Transaction) {
+  rpc CreateTransaction (TransferContract) returns (Transaction) {};
 
-  };
+  rpc BroadcastTransaction (Transaction) returns (Return) {};
 
-  rpc BroadcastTransaction (Transaction) returns (Return) {
+  rpc ListAccounts (EmptyMessage) returns (AccountList) {};
 
-  };
+  rpc UpdateAccount (AccountUpdateContract) returns (Transaction) {};
 
-  rpc ListAccounts (EmptyMessage) returns (AccountList) {
+  rpc CreateAccount (AccountCreateContract) returns (Transaction) {};
 
-  };
+  rpc VoteWitnessAccount (VoteWitnessContract) returns (Transaction) {};
 
-  rpc UpdateAccount (AccountUpdateContract) returns (Transaction) {
+  rpc CreateAssetIssue (AssetIssueContract) returns (Transaction) {};
 
-  };
+  rpc ListWitnesses (EmptyMessage) returns (WitnessList) {};
 
-  rpc CreateAccount (AccountCreateContract) returns (Transaction) {
+  rpc UpdateWitness (WitnessUpdateContract) returns (Transaction) {};
 
-  };
+  rpc CreateWitness (WitnessCreateContract) returns (Transaction) {};
 
-  rpc VoteWitnessAccount (VoteWitnessContract) returns (Transaction) {
+  rpc TransferAsset (TransferAssetContract) returns (Transaction) {}
 
-  };
+  rpc ParticipateAssetIssue (ParticipateAssetIssueContract) returns (Transaction) {}
 
-  rpc CreateAssetIssue (AssetIssueContract) returns (Transaction) {
+  rpc ListNodes (EmptyMessage) returns (NodeList) {}
 
-  };
+  rpc GetAssetIssueList (EmptyMessage) returns (AssetIssueList) {}
 
-  rpc ListWitnesses (EmptyMessage) returns (WitnessList) {
+  rpc GetAssetIssueByAccount (Account) returns (AssetIssueList) {}
 
-  };
+  rpc GetAssetIssueByName (BytesMessage) returns (AssetIssueContract) {}
 
-  rpc UpdateWitness (WitnessUpdateContract) returns (Transaction) {
+  rpc GetNowBlock (EmptyMessage) returns (Block) {}
 
-  };
+  rpc GetBlockByNum (NumberMessage) returns (Block) {}
 
-  rpc CreateWitness (WitnessCreateContract) returns (Transaction) {
-
-  };
-
-  rpc TransferAsset (TransferAssetContract) returns (Transaction) {
-
-  }
-
-  rpc ParticipateAssetIssue (ParticipateAssetIssueContract) returns (Transaction) {
-
-  }
-
-  rpc ListNodes (EmptyMessage) returns (NodeList) {
-
-  }
-  rpc GetAssetIssueList (EmptyMessage) returns (AssetIssueList) {
-  }
-  rpc GetAssetIssueByAccount (Account) returns (AssetIssueList) {
-  }
-  rpc GetAssetIssueByName (BytesMessage) returns (AssetIssueContract) {
-
-  }
-  rpc GetNowBlock (EmptyMessage) returns (Block) {
-
-  }
-  rpc GetBlockByNum (NumberMessage) returns (Block) {
-
-  }
-  rpc TotalTransaction (EmptyMessage) returns (NumberMessage) {
-
-  }
+  rpc TotalTransaction (EmptyMessage) returns (NumberMessage) {}
 };
 ```
 
+### AccountList
+
 `AccountList`: the list of acounts in the blockchain explorer.
+
 message `AccountList` contains one parameter:
 
 - `account`:
@@ -784,7 +814,10 @@ message AccountList {
 }
 ```
 
+### WitnessList
+
 `WitnessList`: the list of witnesses in the blockchain explorer.
+
 message `WitnessList` contains one parameter:
 
 - `witnesses`:
@@ -795,7 +828,10 @@ message WitnessList {
 }
 ```
 
+### AssetIssueList
+
 `AssetIssueList`: the list of issue asset in the blockchain explorer.
+
 message `AssetIssueList` contains one parameter:
 
 - `assetIssue`:
@@ -806,7 +842,10 @@ message AssetIssueList {
 }
 ```
 
+### NodeList
+
 `NodeList`: the list of nodes in the node distribution map.
+
 message `NodeList` contains one parameter:
 
 - `nodes`:
@@ -817,7 +856,10 @@ message NodeList {
 }
 ```
 
+### Address
+
 `Address`: the address of nodes.
+
 message`Address` contains 2 parameters:
 
 - `host`: the host of nodes.
@@ -830,6 +872,8 @@ message Address {
 }
 ```
 
+### Return
+
 message `Return` has only one parameter:
 
 - `result`: a bool flag.
@@ -840,9 +884,12 @@ message `Return` {
 }
 ```
 
-## The message structure of UDP.
+The message structure of UDP.
+
+### Endpoint
 
 `Endpoint`: the storage structure of nodes' information.
+
 message`Endpoint` contains 3 parameters:
 
 - `address`: the address of nodes.
@@ -857,7 +904,10 @@ message Endpoint {
  }
 ```
 
+### PingMessage
+
 `PingMessage`: the message sent from one node to another in the connecting process.
+
 message`PingMessage` contains 4 parameters:
 
 - `from`: which node does the message send from.
@@ -874,7 +924,10 @@ message PingMessage {
 }
 ```
 
+### PongMessage
+
 `PongMessage`: the message implies that nodes are connected.
+
 message`PongMessage` contains 3 parameters:
 
 - `from`: which node does the message send from.
@@ -889,7 +942,10 @@ message PongMessage {
 }
 ```
 
+### FindNeighbours
+
 `FindNeighbours`: the message sent from one node to find another one.
+
 message`FindNeighbours` contains 3 parameters:
 
 - `from`: which node does the message send from.
@@ -904,7 +960,10 @@ message FindNeighbours {
 }
 ```
 
+### FindNeighbour
+
 `FindNeighbour`: the message replied by the neighbour node.
+
 message`Neighbours` contains 3 parameters:
 
 - `from`: which node does the message send from.
