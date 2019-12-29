@@ -113,7 +113,7 @@ A `Witness` contains 8 parameters:
            int64 remain_num = 2;
         }
 
-* Transaction contracts mainly includes account create contract, account update contract transfer contract, transfer asset contract, vote asset contract, vote witness contract, witness creation contract, witness update contract, asset issue contract, participate asset issue contract and deploy contract.
+* Transaction contracts mainly includes account create contract, account update contract, transfer contract, transfer asset contract, vote asset contract, vote witness contract, witness creation contract, witness update contract, asset issue contract, participate asset issue contract and deploy contract.
 
   An `AccountCreateContract` contains 3 parameters:  
    `type`: What type this account is – e.g. _0_ stands for `Normal`.  
