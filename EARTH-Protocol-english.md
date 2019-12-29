@@ -19,7 +19,12 @@
    9. [AssetIssueContract](#assetissuecontract)
    10. [ParticipateAssetIssueContract](#participateassetissuecontract)
    11. [DeployContract](#deploycontract)
-   12. [Contract Types](#contracttypes)
+   12. [Contract Types](#contract-types)
+   13. [TXOutputs](#txoutputs)
+   14. [TXOutput](#TXOutput)
+   15. [TXInput](#TXInput)
+   16. [Result](#Result)
+7. [Inventory](#inventory)
 
 ## Intro
 
@@ -473,6 +478,8 @@ message Transaction {
 }
 ```
 
+### TXOutputs
+
 message `TXOutputs` contains `outputs`.
 
 - `outputs`: an array of `TXOutput`.
@@ -482,6 +489,8 @@ message TXOutputs {
    repeated TXOutput outputs = 1;
 }
 ```
+
+### TXOutput
 
 message `TXOutput` contains `value` and `pubKeyHash`.
 
@@ -494,6 +503,8 @@ message TXOutput {
    bytes pubKeyHash = 2;
 }
 ```
+
+### TXInput
 
 message `TXInput` contains `raw_data` and `signature`.
 
@@ -517,6 +528,8 @@ message TXInput {
   bytes signature = 4;
 }
 ```
+
+### Result
 
 message `Result` contains `fee` and `ret`.
 
@@ -565,6 +578,8 @@ message Inventory {
 }
 ```
 
+## Items
+
 message `Items` contains 4 parameters:
 
 - `type`: type of items – e.g. _1_ stands for `EARTH`.
@@ -595,6 +610,8 @@ message Items {
 }
 ```
 
+## InventoryItems
+
 `InventoryItems` contains `type` and `items`.
 
 - `type`: what type of item.
@@ -606,6 +623,8 @@ message InventoryItems {
   repeated bytes items = 2;
 }
 ```
+
+## BlockInventory
 
 message `BlockInventory` contains `type`.
 
@@ -628,6 +647,8 @@ message BlockInventory {
 }
 ```
 
+## BlockId
+
 message `BlockId` contains `ids` and `type`.
 
 - `ids`: the identification of block.
@@ -647,6 +668,8 @@ message BlockId {
   Type type = 2;
 }
 ```
+
+## ReasonCode
 
 `ReasonCode`: the type of reason.
 
@@ -688,10 +711,14 @@ enum ReasonCode {
 }
 ```
 
+## DisconnectMessage
+
 message`DisconnectMessage` contains `reason`.
 
 - `DisconnectMessage`: the message when disconnection occurs.
 - `reason`: the reason for disconnecting.
+
+## HelloMessage
 
 message`HelloMessage` contains 2 parameters:
 
@@ -827,7 +854,7 @@ service Wallet {
 };
 ```
 
-### AccountList
+## AccountList
 
 `AccountList`: the list of acounts in the blockchain explorer.
 
@@ -841,7 +868,7 @@ message AccountList {
 }
 ```
 
-### WitnessList
+## WitnessList
 
 `WitnessList`: the list of witnesses in the blockchain explorer.
 
@@ -855,7 +882,7 @@ message WitnessList {
 }
 ```
 
-### AssetIssueList
+## AssetIssueList
 
 `AssetIssueList`: the list of issue asset in the blockchain explorer.
 
@@ -869,7 +896,7 @@ message AssetIssueList {
 }
 ```
 
-### NodeList
+## NodeList
 
 `NodeList`: the list of nodes in the node distribution map.
 
@@ -883,7 +910,7 @@ message NodeList {
 }
 ```
 
-### Address
+## Address
 
 `Address`: the address of nodes.
 
@@ -899,7 +926,7 @@ message Address {
 }
 ```
 
-### Return
+## Return
 
 message `Return` has only one parameter:
 
@@ -913,7 +940,7 @@ message `Return` {
 
 The message structure of UDP.
 
-### Endpoint
+## Endpoint
 
 `Endpoint`: the storage structure of nodes' information.
 
@@ -931,7 +958,7 @@ message Endpoint {
  }
 ```
 
-### PingMessage
+## PingMessage
 
 `PingMessage`: the message sent from one node to another in the connecting process.
 
@@ -951,7 +978,7 @@ message PingMessage {
 }
 ```
 
-### PongMessage
+## PongMessage
 
 `PongMessage`: the message implies that nodes are connected.
 
@@ -969,7 +996,7 @@ message PongMessage {
 }
 ```
 
-### FindNeighbours
+## FindNeighbours
 
 `FindNeighbours`: the message sent from one node to find another one.
 
@@ -987,7 +1014,7 @@ message FindNeighbours {
 }
 ```
 
-### FindNeighbour
+## FindNeighbour
 
 `FindNeighbour`: the message replied by the neighbour node.
 
