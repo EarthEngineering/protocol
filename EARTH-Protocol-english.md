@@ -539,39 +539,42 @@ message BlockId {
 `ReasonCode`: the type of reason.
 
 `ReasonCode` contains 15 types of disconnect reasons:
-`REQUESTED`
-`TCP_ERROR`
-`BAD_PROTOCOL`
-`USELESS_PEER`
-`TOO_MANY_PEERS`
-`DUPLICATE_PEER`
-`INCOMPATIBLE_PROTOCOL`
-`NULL_IDENTITY`
-`PEER_QUITING`
-`UNEXPECTED_IDENTITY`
-`LOCAL_IDENTITY`
-`PING_TIMEOUT`
-`USER_REASON`
-`RESET`
-`UNKNOWN`
 
-      enum ReasonCode {
-        REQUESTED = 0;
-        TCP_ERROR = 1;
-        BAD_PROTOCOL = 2;
-        USELESS_PEER = 3;
-        TOO_MANY_PEERS = 4;
-        DUPLICATE_PEER = 5;
-        INCOMPATIBLE_PROTOCOL = 6;
-        NULL_IDENTITY = 7;
-        PEER_QUITING = 8;
-        UNEXPECTED_IDENTITY = 9;
-        LOCAL_IDENTITY = 10;
-        PING_TIMEOUT = 11;
-        USER_REASON = 12;
-        RESET = 16;
-        UNKNOWN = 255;
-      }
+- `REQUESTED`
+- `TCP_ERROR`
+- `BAD_PROTOCOL`
+- `USELESS_PEER`
+- `TOO_MANY_PEERS`
+- `DUPLICATE_PEER`
+- `INCOMPATIBLE_PROTOCOL`
+- `NULL_IDENTITY`
+- `PEER_QUITING`
+- `UNEXPECTED_IDENTITY`
+- `LOCAL_IDENTITY`
+- `PING_TIMEOUT`
+- `USER_REASON`
+- `RESET`
+- `UNKNOWN`
+
+```protobuf
+enum ReasonCode {
+  REQUESTED = 0;
+  TCP_ERROR = 1;
+  BAD_PROTOCOL = 2;
+  USELESS_PEER = 3;
+  TOO_MANY_PEERS = 4;
+  DUPLICATE_PEER = 5;
+  INCOMPATIBLE_PROTOCOL = 6;
+  NULL_IDENTITY = 7;
+  PEER_QUITING = 8;
+  UNEXPECTED_IDENTITY = 9;
+  LOCAL_IDENTITY = 10;
+  PING_TIMEOUT = 11;
+  USER_REASON = 12;
+  RESET = 16;
+  UNKNOWN = 255;
+}
+```
 
 message`DisconnectMessage` contains `reason`.
 `DisconnectMessage`: the message when disconnection occurs.
@@ -582,48 +585,88 @@ message`HelloMessage` contains 2 parameters:
 `from`: the nodes that request for building connection.
 `version`: the version when connection is built.
 
-- Wallet Service RPC and blockchain explorer
+## Wallet Service RPC and blockchain explorer
 
 `Wallet` service contains several RPCs.
-**`GetBalance`** :
+
+### `GetBalance`
+
 Return balance of an `Account`.
-**`CreateTransaction`** ：
+
+### `CreateTransaction`
+
 Create a transaction by giving a `TransferContract`. A Transaction containing a transaction creation will be returned.
-**`BroadcastTransaction`** :
+
+### `BroadcastTransaction`
+
 Broadcast a `Transaction`. A `Return` will be returned indicating if broadcast is success of not.
-**`CreateAccount`** :
+
+### `CreateAccount`
+
 Create an account by giving a `AccountCreateContract`.
-**`CreatAssetIssue`** :
+
+### `CreatAssetIssue`
+
 Issue an asset by giving a `AssetIssueContract`.
-**`ListAccounts`**:
+
+### `ListAccounts`
+
 Check out the list of accounts by giving a `ListAccounts`.
-**`UpdateAccount`**:
+
+### `UpdateAccount`
+
 Issue an asset by giving a `UpdateAccountContract`.
-**`VoteWitnessAccount`**:
+
+### `VoteWitnessAccount`
+
 Issue an asset by giving a `VoteWitnessContract`.
-**`WitnessList`**:
+
+### `WitnessList`
+
 Check out the list of witnesses by giving a `WitnessList`.
-**`UpdateWitness`**:
+
+### `UpdateWitness`
+
 Issue an asset by giving a `WitnessUpdateContract`.
-**`CreateWitness`**:
+
+### `CreateWitness`
+
 Issue an asset by giving a `WitnessCreateContract`.
-**`TransferAsset`**:
+
+### `TransferAsset`
+
 Issue an asset by giving a `TransferAssetContract`.
-**`ParticipateAssetIssue`**:
+
+### `ParticipateAssetIssue`
+
 Issue an asset by giving a `ParticipateAssetIssueContract`.
-**`ListNodes`**:
+
+### `ListNodes`
+
 Check out the list of nodes by giving a `ListNodes`.
-**`GetAssetIssueList`**:
+
+### `GetAssetIssueList`
+
 Get the list of issue asset by giving a `GetAssetIssueList`.
-**`GetAssetIssueByAccount`**:
+
+### `GetAssetIssueByAccount`
+
 Get issue asset by giving a `Account`.
-**`GetAssetIssueByName`**:
+
+### `GetAssetIssueByName`
+
 Get issue asset by giving a`Name`.
-**`GetNowBlock`**:
+
+### `GetNowBlock`
+
 Get block.
-**`GetBlockByNum`**:
+
+### `GetBlockByNum`
+
 Get block by block number.
-**`TotalTransaction`**:
+
+### `TotalTransaction`
+
 Check out the total transaction.
 
       service Wallet {
@@ -817,6 +860,10 @@ message `Return` has only one parameter:
          }
 
 # Please check detailed protocol document that may change with the iteration of the program at any time. Please refer to the latest version.
+
+```
+
+```
 
 ```
 
