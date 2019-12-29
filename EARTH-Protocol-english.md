@@ -91,200 +91,234 @@ A `Witness` contains 8 parameters:
   }
 ```
 
-- A block typically contains transaction data and a blockheader, which is a list of basic block information, including timestamp, signature, parent hash, root of Merkle tree and so on.
+## Block
 
-  A block contains `transactions` and a `block_header`.  
-   `transactions`: transaction data of this block.  
-   `block_header`: one part of a block.
+A block typically contains transaction data and a blockheader, which is a list of basic block information, including timestamp, signature, parent hash, root of Merkle tree and so on.
 
-       // block
-       message Block {
-         repeated Transaction transactions = 1;
-         BlockHeader block_header = 2;
-        }
+A block contains `transactions` and a `block_header`.  
+ `transactions`: transaction data of this block.  
+ `block_header`: one part of a block.
 
-  A `BlockHeader` contains `raw_data` and `witness_signature`.  
-   `raw_data`: a `raw` message.  
-   `witness_signature`: signature for this block header from witness node.
+```protobuf
+// block
+message Block {
+  repeated Transaction transactions = 1;
+  BlockHeader block_header = 2;
+ }
+```
 
-  A message `raw` contains 6 parameters:  
-   `timestamp`: timestamp of this message – e.g. _14356325_.  
-   `txTrieRoot`: the root of Merkle Tree in this block – e.g. “_7dacsa…3ed_.”  
-   `parentHash`: the hash of last block – e.g. “_7dacsa…3ed_.”  
-   `number`: the height of this block – e.g. _13534657_.  
-   `witness_id`: the id of witness which packed this block – e.g. “_0xu82h…7237_”.  
-   `witness_address`: the adresss of the witness packed this block – e.g. “_0xu82h…7237_”.
+## Blockheader
 
-       message BlockHeader {
-         message raw {
-           int64 timestamp = 1;
-           bytes txTrieRoot = 2;
-           bytes parentHash = 3;
-           //bytes nonce = 5;
-           //bytes difficulty = 6;
-           uint64 number = 7;
-           uint64 witness_id = 8;
-           bytes witness_address = 9;
-        }
-        raw raw_data = 1;
-        bytes witness_signature = 2;
-        }
+A `BlockHeader` contains `raw_data` and `witness_signature`.  
+ `raw_data`: a `raw` message.  
+ `witness_signature`: signature for this block header from witness node.
 
-  message `ChainInventory` contains `BlockId` and `remain_num`.  
-   `BlockId`: the identification of block.  
-   `remain_num`：the remain number of blocks in the synchronizing process.
+A message `raw` contains 6 parameters:  
+ `timestamp`: timestamp of this message – e.g. _14356325_.  
+ `txTrieRoot`: the root of Merkle Tree in this block – e.g. “_7dacsa…3ed_.”  
+ `parentHash`: the hash of last block – e.g. “_7dacsa…3ed_.”  
+ `number`: the height of this block – e.g. _13534657_.  
+ `witness_id`: the id of witness which packed this block – e.g. “_0xu82h…7237_”.  
+ `witness_address`: the adresss of the witness packed this block – e.g. “_0xu82h…7237_”.
 
-  A `BlockId` contains 2 parameters:  
-   `hash`: the hash of block.  
-   `number`: the hash and height of block.
-
-       message ChainInventory {
-          message BlockId {
-             bytes hash = 1;
-             int64 number = 2;
-           }
-           repeated BlockId ids = 1;
-           int64 remain_num = 2;
-        }
-
-* Transaction contracts mainly includes account create contract, account update contract, transfer contract, transfer asset contract, vote asset contract, vote witness contract, witness creation contract, witness update contract, asset issue contract, participate asset issue contract and deploy contract.
-
-  An `AccountCreateContract` contains 3 parameters:  
-   `type`: What type this account is – e.g. _0_ stands for `Normal`.  
-   `account_name`: the name for this account – e.g.”_Billsaccount_”.  
-   `owner_address`: the address of contract owner – e.g. “_0xu82h…7237_”.
-
-  message AccountCreateContract {  
-   AccountType type = 1;  
-   bytes account\*name = 2;  
-   bytes owner_address = 3;
+```protobuf
+message BlockHeader {
+  message raw {
+    int64 timestamp = 1;
+    bytes txTrieRoot = 2;
+    bytes parentHash = 3;
+    //bytes nonce = 5;
+    //bytes difficulty = 6;
+    uint64 number = 7;
+    uint64 witness_id = 8;
+    bytes witness_address = 9;
   }
+  raw raw_data = 1;
+  bytes witness_signature = 2;
+}
+```
 
-  A `AccountUpdateContract` contains 2 paremeters:  
-   `account_name`: the name for this account – e.g.”\_Billsaccount\*”.  
-   `owner_address`: the address of contract owner – e.g. “_0xu82h…7237_”.
+message `ChainInventory` contains `BlockId` and `remain_num`.
+`BlockId`: the identification of block.
+`remain_num`：the remain number of blocks in the synchronizing process.
 
-       message AccountUpdateContract {
-         bytes account_name = 1;
-         bytes owner_address = 2;
-        }
+A `BlockId` contains 2 parameters:
+`hash`: the hash of block.
+`number`: the hash and height of block.
 
-  A `TransferContract` contains 3 parameters:  
-   `amount`: the amount of EARTH – e.g. _12534_.  
-   `to_address`: the receiver address – e.g. “_0xu82h…7237_”.  
-   `owner_address`: the address of contract owner – e.g. “_0xu82h…7237_”.
+```protobuf
+message ChainInventory {
+  message BlockId {
+    bytes hash = 1;
+    int64 number = 2;
+  }
+  repeated BlockId ids = 1;
+  int64 remain_num = 2;
+}
+```
 
-       message TransferContract {
-         bytes owner_address = 1;
-         bytes to_address = 2;
-         int64 amount = 3;
-        }
+## Transaction
 
-  A `TransferAssetContract` contains 4 parameters:  
-   `asset_name`: the name for asset – e.g.”_Billsaccount_”.  
-   `to_address`: the receiver address – e.g. “_0xu82h…7237_”.  
-   `owner_address`: the address of contract owner – e.g. “_0xu82h…7237_”.  
-   `amount`: the amount of target asset - e.g._12353_.
+Transaction contracts mainly includes account create contract, account update contract, transfer contract, transfer asset contract, vote asset contract, vote witness contract, witness creation contract, witness update contract, asset issue contract, participate asset issue contract and deploy contract.
 
-       message TransferAssetContract {
-         bytes asset_name = 1;
-         bytes owner_address = 2;
-         bytes to_address = 3;
-         int64 amount = 4;
-        }
+An `AccountCreateContract` contains 3 parameters:
+`type`: What type this account is – e.g. _0_ stands for `Normal`.
+`account_name`: the name for this account – e.g.”_Billsaccount_”.
+`owner_address`: the address of contract owner – e.g. “_0xu82h…7237_”.
 
-  A `VoteAssetContract` contains 4 parameters:  
-   `vote_address`: the voted address of the asset.  
-   `support`: is the votes supportive or not – e.g. _true_.  
-   `owner_address`: the address of contract owner – e.g. “_0xu82h…7237_”.  
-   `count`: the count number of votes- e.g. _2324234_.
+```protobuf
+message AccountCreateContract {
+  AccountType type = 1;
+  bytes account\*name = 2;
+  bytes owner_address = 3;
+}
+```
 
-       message VoteAssetContract {
-         bytes owner_address = 1;
-         repeated bytes vote_address = 2;
-         bool support = 3;
-         int32 count = 5;
-        }
+A `AccountUpdateContract` contains 2 paremeters:
+`account_name`: the name for this account – e.g.”\_Billsaccount\*”.
+`owner_address`: the address of contract owner – e.g. “_0xu82h…7237_”.
 
-  A `VoteWitnessContract` contains 4 parameters:  
-   `vote_address`: the addresses of those who voted.  
-   `support`: is the votes supportive or not - e.g. _true_.  
-   `owner_address`: the address of contract owner – e.g. “_0xu82h…7237_”.  
-   `count`: - e.g. the count number of vote – e.g. _32632_.
+```protobuf
+message AccountUpdateContract {
+  bytes account_name = 1;
+  bytes owner_address = 2;
+}
+```
 
-       message VoteWitnessContract {
-         bytes owner_address = 1;
-         repeated bytes vote_address = 2;
-         bool support = 3;
-         int32 count = 5;
-        }
+A `TransferContract` contains 3 parameters:
+`amount`: the amount of EARTH – e.g. _12534_.
+`to_address`: the receiver address – e.g. “_0xu82h…7237_”.
+`owner_address`: the address of contract owner – e.g. “_0xu82h…7237_”.
 
-  A `WitnessCreateContract` contains 3 parameters:  
-   `private_key`: the private key of contract– e.g. “_0xu82h…7237_”.  
-   `owner_address`: the address of contract owner – e.g. “_0xu82h…7237_”.  
-   `url`: the url for the witness – e.g. “_https://www.earth.engineering_”.
+```protobuf
+message TransferContract {
+  bytes owner_address = 1;
+  bytes to_address = 2;
+  int64 amount = 3;
+}
+```
 
-       message WitnessCreateContract {
-         bytes owner_address = 1;
-         bytes private_key = 2;
-         bytes url = 12;
-        }
+A `TransferAssetContract` contains 4 parameters:
+`asset_name`: the name for asset – e.g.”_Billsaccount_”.
+`to_address`: the receiver address – e.g. “_0xu82h…7237_”.
+`owner_address`: the address of contract owner – e.g. “_0xu82h…7237_”.
+`amount`: the amount of target asset - e.g._12353_.
 
-  A `WitnessUpdateContract` contains 2 parameters:  
-   `owner_address`: the address of contract owner – e.g. “_0xu82h…7237_”.  
-   `update_url`: the url for the witness – e.g. “_https://www.earth.engineering_”.
+```protobuf
+message TransferAssetContract {
+  bytes asset_name = 1;
+  bytes owner_address = 2;
+  bytes to_address = 3;
+  int64 amount = 4;
+ }
+```
 
-       message WitnessUpdateContract {
-          bytes owner_address = 1;
-          bytes update_url = 12;
-        }
+A `VoteAssetContract` contains 4 parameters:
+`vote_address`: the voted address of the asset.
+`support`: is the votes supportive or not – e.g. _true_.
+`owner_address`: the address of contract owner – e.g. “_0xu82h…7237_”.
+`count`: the count number of votes- e.g. _2324234_.
 
-An `AssetIssueContract` contains 11 parameters:  
- `owner_address`: the address for contract owner – e.g. “_0xu82h…7237_”.  
- `name`: the name for this contract – e.g. “Billscontract”.  
- `total_supply`: the maximum supply of this asset – e.g. _1000000000_.  
- `earth_num`: the number of EARTH – e.g._232241_.  
- `num`: number of corresponding asset.  
- `start_time`: the starting date of this contract – e.g._20170312_.  
- `end_time`: the expiring date of this contract – e.g. _20170512_.  
- `vote_score`: the vote score of this contract received – e.g. _12343_.  
- `description`: the description of this contract – e.g.”_earthdada_”.  
- `url`: the url of this contract – e.g. “_https://www.earth.engineering_”.
+```protobuf
+message VoteAssetContract {
+  bytes owner_address = 1;
+  repeated bytes vote_address = 2;
+  bool support = 3;
+  int32 count = 5;
+ }
+```
 
-       message AssetIssueContract {
-         bytes owner_address = 1;
-         bytes name = 2;
-         int64 total_supply = 4;
-         int32 earth_num = 6;
-         int32 num = 8;
-         int64 start_time = 9;
-         int64 end_time = 10;
-         int32 vote_score = 16;
-         bytes description = 20;
-         bytes url = 21;
-        }
+A `VoteWitnessContract` contains 4 parameters:
+`vote_address`: the addresses of those who voted.
+`support`: is the votes supportive or not - e.g. _true_.
+`owner_address`: the address of contract owner – e.g. “_0xu82h…7237_”.
+`count`: - e.g. the count number of vote – e.g. _32632_.
 
-A `ParticipateAssetIssueContract` contains 4 parameters:  
- `owner_address`: the address for contract owner – e.g. “_0xu82h…7237_”.  
- `to_address`: the receiver address – e.g. “_0xu82h…7237_”.  
- `asset_name`: the name of target asset.  
- `amount`: the amount of drops.
+```protobuf
+message VoteWitnessContract {
+  bytes owner_address = 1;
+  repeated bytes vote_address = 2;
+  bool support = 3;
+  int32 count = 5;
+ }
+```
 
-       message ParticipateAssetIssueContract {
-         bytes owner_address = 1;
-         bytes to_address = 2;
-         bytes asset_name = 3;
-         int64 amount = 4;
-        }
+A `WitnessCreateContract` contains 3 parameters:
+`private_key`: the private key of contract– e.g. “_0xu82h…7237_”.
+`owner_address`: the address of contract owner – e.g. “_0xu82h…7237_”.
+`url`: the url for the witness – e.g. “_https://www.earth.engineering_”.
 
-A `DeployContract` contains 2 parameters:  
- `script`: the script of this contract.  
- `owner_address`: the address for contract owner – e.g. “_0xu82h…7237_”.
+```protobuf
+message WitnessCreateContract {
+  bytes owner_address = 1;
+  bytes private_key = 2;
+  bytes url = 12;
+ }
+```
 
-       message DeployContract {
-         bytes owner_address = 1;
-         bytes script = 2;
-        }                       t
+A `WitnessUpdateContract` contains 2 parameters:
+`owner_address`: the address of contract owner – e.g. “_0xu82h…7237_”.
+`update_url`: the url for the witness – e.g. “_https://www.earth.engineering_”.
+
+```protobuf
+message WitnessUpdateContract {
+   bytes owner_address = 1;
+   bytes update_url = 12;
+ }
+```
+
+An `AssetIssueContract` contains 11 parameters:
+`owner_address`: the address for contract owner – e.g. “_0xu82h…7237_”.
+`name`: the name for this contract – e.g. “Billscontract”.
+`total_supply`: the maximum supply of this asset – e.g. _1000000000_.
+`earth_num`: the number of EARTH – e.g._232241_.
+`num`: number of corresponding asset.
+`start_time`: the starting date of this contract – e.g._20170312_.
+`end_time`: the expiring date of this contract – e.g. _20170512_.
+`vote_score`: the vote score of this contract received – e.g. _12343_.
+`description`: the description of this contract – e.g.”_earthdada_”.
+`url`: the url of this contract – e.g. “_https://www.earth.engineering_”.
+
+```protobuf
+message AssetIssueContract {
+  bytes owner_address = 1;
+  bytes name = 2;
+  int64 total_supply = 4;
+  int32 earth_num = 6;
+  int32 num = 8;
+  int64 start_time = 9;
+  int64 end_time = 10;
+  int32 vote_score = 16;
+  bytes description = 20;
+  bytes url = 21;
+}
+```
+
+A `ParticipateAssetIssueContract` contains 4 parameters:
+`owner_address`: the address for contract owner – e.g. “_0xu82h…7237_”.
+`to_address`: the receiver address – e.g. “_0xu82h…7237_”.
+`asset_name`: the name of target asset.
+`amount`: the amount of drops.
+
+```protobuf
+message ParticipateAssetIssueContract {
+  bytes owner_address = 1;
+  bytes to_address = 2;
+  bytes asset_name = 3;
+  int64 amount = 4;
+}
+```
+
+A `DeployContract` contains 2 parameters:
+`script`: the script of this contract.
+`owner_address`: the address for contract owner – e.g. “_0xu82h…7237_”.
+
+```protobuf
+message DeployContract {
+  bytes owner_address = 1;
+  bytes script = 2;
+}                       t
+```
 
 - Each transaction contains several TXInputs, TXOutputs and other related qualities.
   Input, transaction and head block all require signature.
@@ -397,12 +431,12 @@ A `DeployContract` contains 2 parameters:
 
 * Inventory is mainly used to inform peer nodes the list of items.
 
-  `Inventory` contains `type` and `ids`.  
-  `type`: what type this `Inventory` is. – e.g. _0_ stands for `EARTH`.  
+  `Inventory` contains `type` and `ids`.
+  `type`: what type this `Inventory` is. – e.g. _0_ stands for `EARTH`.
   `ids`: ID of things in this `Inventory`.
 
-  Two `Inventory` types: `EARTH` and `BLOCK`.  
-  `EARTH`: transaction.  
+  Two `Inventory` types: `EARTH` and `BLOCK`.
+  `EARTH`: transaction.
   `BLOCK`: block.
 
       // Inventory
@@ -415,16 +449,16 @@ A `DeployContract` contains 2 parameters:
          repeated bytes ids = 2;
        }
 
-  message `Items` contains 4 parameters:  
-  `type`: type of items – e.g. _1_ stands for `EARTH`.  
-  `blocks`: blocks in `Items` if there is any.  
-  `block_headers`: block headers if there is any.  
+  message `Items` contains 4 parameters:
+  `type`: type of items – e.g. _1_ stands for `EARTH`.
+  `blocks`: blocks in `Items` if there is any.
+  `block_headers`: block headers if there is any.
   `transactions`: transactions if there is any.
 
-  `Items` have four types: `ERR`, `EARTH`, `BLOCK` and `BLOCKHEADER`.  
-  `ERR`: error.  
-  `EARTH`: transaction.  
-  `BLOCK`: block.  
+  `Items` have four types: `ERR`, `EARTH`, `BLOCK` and `BLOCKHEADER`.
+  `ERR`: error.
+  `EARTH`: transaction.
+  `BLOCK`: block.
   `BLOCKHEADER`: block header.
 
       message Items {
@@ -441,8 +475,8 @@ A `DeployContract` contains 2 parameters:
          repeated Transaction transactions = 4;
        }
 
-  `InventoryItems` contains `type` and `items`.  
-  `type`: what type of item.  
+  `InventoryItems` contains `type` and `items`.
+  `type`: what type of item.
   `items`: items in an `InventoryItems`.
 
       message InventoryItems {
@@ -450,7 +484,7 @@ A `DeployContract` contains 2 parameters:
         repeated bytes items = 2;
        }
 
-  message `BlockInventory` contains `type`.  
+  message `BlockInventory` contains `type`.
   `type`: what type of inventory.
 
   There are 3 types:`SYNC`, `ADVTISE`, `FETCH`.
@@ -463,13 +497,13 @@ A `DeployContract` contains 2 parameters:
            FETCH = 2;
          }
 
-  message `BlockId` contains `ids` and `type`.  
-   `ids`: the identification of block.  
-   `type`: what type of the block.
+  message `BlockId` contains `ids` and `type`.
+  `ids`: the identification of block.
+  `type`: what type of the block.
 
-  `ids` contains 2 paremeters:  
-   `hash`: the hash of block.  
-   `number`: the hash and height of block.
+  `ids` contains 2 paremeters:
+  `hash`: the hash of block.
+  `number`: the hash and height of block.
 
        message BlockId {
           bytes hash = 1;
@@ -481,22 +515,22 @@ A `DeployContract` contains 2 parameters:
 
   `ReasonCode`: the type of reason.
 
-  `ReasonCode` contains 15 types of disconnect reasons:  
-   `REQUESTED`  
-   `TCP_ERROR`  
-   `BAD_PROTOCOL`  
-   `USELESS_PEER`  
-   `TOO_MANY_PEERS`  
-   `DUPLICATE_PEER`  
-   `INCOMPATIBLE_PROTOCOL`  
-   `NULL_IDENTITY`  
-   `PEER_QUITING`  
-   `UNEXPECTED_IDENTITY`  
-   `LOCAL_IDENTITY`  
-   `PING_TIMEOUT`  
-   `USER_REASON`  
-   `RESET`  
-   `UNKNOWN`
+  `ReasonCode` contains 15 types of disconnect reasons:
+  `REQUESTED`
+  `TCP_ERROR`
+  `BAD_PROTOCOL`
+  `USELESS_PEER`
+  `TOO_MANY_PEERS`
+  `DUPLICATE_PEER`
+  `INCOMPATIBLE_PROTOCOL`
+  `NULL_IDENTITY`
+  `PEER_QUITING`
+  `UNEXPECTED_IDENTITY`
+  `LOCAL_IDENTITY`
+  `PING_TIMEOUT`
+  `USER_REASON`
+  `RESET`
+  `UNKNOWN`
 
       enum ReasonCode {
         REQUESTED = 0;
@@ -516,58 +550,58 @@ A `DeployContract` contains 2 parameters:
         UNKNOWN = 255;
       }
 
-  message`DisconnectMessage` contains `reason`.  
-   `DisconnectMessage`: the message when disconnection occurs.  
-   `reason`: the reason for disconnecting.
+  message`DisconnectMessage` contains `reason`.
+  `DisconnectMessage`: the message when disconnection occurs.
+  `reason`: the reason for disconnecting.
 
-  message`HelloMessage` contains 2 parameters:  
-   `HelloMessage`: the message for building connection.  
-   `from`: the nodes that request for building connection.  
-   `version`: the version when connection is built.
+  message`HelloMessage` contains 2 parameters:
+  `HelloMessage`: the message for building connection.
+  `from`: the nodes that request for building connection.
+  `version`: the version when connection is built.
 
 * Wallet Service RPC and blockchain explorer
 
-`Wallet` service contains several RPCs.  
- **`GetBalance`** :  
- Return balance of an `Account`.  
- **`CreateTransaction`** ：  
- Create a transaction by giving a `TransferContract`. A Transaction containing a transaction creation will be returned.  
- **`BroadcastTransaction`** :  
- Broadcast a `Transaction`. A `Return` will be returned indicating if broadcast is success of not.  
- **`CreateAccount`** :  
- Create an account by giving a `AccountCreateContract`.  
- **`CreatAssetIssue`** :  
- Issue an asset by giving a `AssetIssueContract`.  
- **`ListAccounts`**:  
- Check out the list of accounts by giving a `ListAccounts`.  
- **`UpdateAccount`**:  
- Issue an asset by giving a `UpdateAccountContract`.  
- **`VoteWitnessAccount`**:  
- Issue an asset by giving a `VoteWitnessContract`.  
- **`WitnessList`**:  
- Check out the list of witnesses by giving a `WitnessList`.  
- **`UpdateWitness`**:  
- Issue an asset by giving a `WitnessUpdateContract`.  
- **`CreateWitness`**:  
- Issue an asset by giving a `WitnessCreateContract`.  
- **`TransferAsset`**:  
- Issue an asset by giving a `TransferAssetContract`.  
- **`ParticipateAssetIssue`**:  
- Issue an asset by giving a `ParticipateAssetIssueContract`.  
- **`ListNodes`**:  
- Check out the list of nodes by giving a `ListNodes`.  
- **`GetAssetIssueList`**:  
- Get the list of issue asset by giving a `GetAssetIssueList`.  
- **`GetAssetIssueByAccount`**:  
- Get issue asset by giving a `Account`.  
- **`GetAssetIssueByName`**:  
- Get issue asset by giving a`Name`.  
- **`GetNowBlock`**:  
- Get block.  
- **`GetBlockByNum`**:  
- Get block by block number.  
- **`TotalTransaction`**:  
- Check out the total transaction.
+`Wallet` service contains several RPCs.
+**`GetBalance`** :
+Return balance of an `Account`.
+**`CreateTransaction`** ：
+Create a transaction by giving a `TransferContract`. A Transaction containing a transaction creation will be returned.
+**`BroadcastTransaction`** :
+Broadcast a `Transaction`. A `Return` will be returned indicating if broadcast is success of not.
+**`CreateAccount`** :
+Create an account by giving a `AccountCreateContract`.
+**`CreatAssetIssue`** :
+Issue an asset by giving a `AssetIssueContract`.
+**`ListAccounts`**:
+Check out the list of accounts by giving a `ListAccounts`.
+**`UpdateAccount`**:
+Issue an asset by giving a `UpdateAccountContract`.
+**`VoteWitnessAccount`**:
+Issue an asset by giving a `VoteWitnessContract`.
+**`WitnessList`**:
+Check out the list of witnesses by giving a `WitnessList`.
+**`UpdateWitness`**:
+Issue an asset by giving a `WitnessUpdateContract`.
+**`CreateWitness`**:
+Issue an asset by giving a `WitnessCreateContract`.
+**`TransferAsset`**:
+Issue an asset by giving a `TransferAssetContract`.
+**`ParticipateAssetIssue`**:
+Issue an asset by giving a `ParticipateAssetIssueContract`.
+**`ListNodes`**:
+Check out the list of nodes by giving a `ListNodes`.
+**`GetAssetIssueList`**:
+Get the list of issue asset by giving a `GetAssetIssueList`.
+**`GetAssetIssueByAccount`**:
+Get issue asset by giving a `Account`.
+**`GetAssetIssueByName`**:
+Get issue asset by giving a`Name`.
+**`GetNowBlock`**:
+Get block.
+**`GetBlockByNum`**:
+Get block by block number.
+**`TotalTransaction`**:
+Check out the total transaction.
 
       service Wallet {
 
@@ -646,50 +680,50 @@ A `DeployContract` contains 2 parameters:
         }
       };
 
-`AccountList`: the list of acounts in the blockchain explorer.  
- message `AccountList` contains one parameter:  
- `account`:
+`AccountList`: the list of acounts in the blockchain explorer.
+message `AccountList` contains one parameter:
+`account`:
 
        message AccountList {
          repeated Account accounts = 1;
        }
 
-`WitnessList`: the list of witnesses in the blockchain explorer.  
- message `WitnessList` contains one parameter:  
- `witnesses`:
+`WitnessList`: the list of witnesses in the blockchain explorer.
+message `WitnessList` contains one parameter:
+`witnesses`:
 
         message WitnessList {
           repeated Witness witnesses = 1;
         }
 
-`AssetIssueList`: the list of issue asset in the blockchain explorer.  
- message `AssetIssueList` contains one parameter:  
- `assetIssue`:
+`AssetIssueList`: the list of issue asset in the blockchain explorer.
+message `AssetIssueList` contains one parameter:
+`assetIssue`:
 
         message AssetIssueList {
           repeated AssetIssueContract assetIssue = 1;
         }
 
-`NodeList`: the list of nodes in the node distribution map.  
- message `NodeList` contains one parameter:  
- `nodes`:
+`NodeList`: the list of nodes in the node distribution map.
+message `NodeList` contains one parameter:
+`nodes`:
 
          message NodeList {
            repeated Node nodes = 1;
          }
 
-`Address`: the address of nodes.  
- message`Address` contains 2 parameters:  
- `host`: the host of nodes.  
- `port`: the port number of nodes.
+`Address`: the address of nodes.
+message`Address` contains 2 parameters:
+`host`: the host of nodes.
+`port`: the port number of nodes.
 
           message Address {
             bytes host = 1;
             int32 port = 2;
           }
 
-message `Return` has only one parameter:  
- `result`: a bool flag.
+message `Return` has only one parameter:
+`result`: a bool flag.
 
           message `Return` {
             bool result = 1;
@@ -697,10 +731,10 @@ message `Return` has only one parameter:
 
 - The message structure of UDP.
 
-  `Endpoint`: the storage structure of nodes' information.  
-  message`Endpoint` contains 3 parameters:  
-  `address`: the address of nodes.  
-  `port`: the port number.  
+  `Endpoint`: the storage structure of nodes' information.
+  message`Endpoint` contains 3 parameters:
+  `address`: the address of nodes.
+  `port`: the port number.
   `nodeId`:the ID of nodes.
 
       message Endpoint {
@@ -709,12 +743,12 @@ message `Return` has only one parameter:
          bytes nodeId = 3;
        }
 
-  `PingMessage`: the message sent from one node to another in the connecting process.  
-   message`PingMessage` contains 4 parameters:  
-   `from`: which node does the message send from.  
-   `to`: which node will the message send to.  
-   `version`: the version of the Internet.  
-   `timestamp`: the timestamp of message.
+  `PingMessage`: the message sent from one node to another in the connecting process.
+  message`PingMessage` contains 4 parameters:
+  `from`: which node does the message send from.
+  `to`: which node will the message send to.
+  `version`: the version of the Internet.
+  `timestamp`: the timestamp of message.
 
        message PingMessage {
           Endpoint from = 1;
@@ -723,11 +757,11 @@ message `Return` has only one parameter:
          int64 timestamp = 4;
         }
 
-  `PongMessage`: the message implies that nodes are connected.  
-   message`PongMessage` contains 3 parameters:  
-   `from`: which node does the message send from.  
-   `echo`:  
-   `timestamp`: the timestamp of message.
+  `PongMessage`: the message implies that nodes are connected.
+  message`PongMessage` contains 3 parameters:
+  `from`: which node does the message send from.
+  `echo`:
+  `timestamp`: the timestamp of message.
 
         message PongMessage {
           Endpoint from = 1;
@@ -735,11 +769,11 @@ message `Return` has only one parameter:
           int64 timestamp = 3;
          }
 
-  `FindNeighbours`: the message sent from one node to find another one.  
-   message`FindNeighbours` contains 3 parameters:  
-   `from`: which node does the message send from.  
-   `targetId`: the ID of targeted node.  
-   `timestamp`: the timestamp of message.
+  `FindNeighbours`: the message sent from one node to find another one.
+  message`FindNeighbours` contains 3 parameters:
+  `from`: which node does the message send from.
+  `targetId`: the ID of targeted node.
+  `timestamp`: the timestamp of message.
 
         message FindNeighbours {
           Endpoint from = 1;
@@ -747,11 +781,11 @@ message `Return` has only one parameter:
           int64 timestamp = 3;
          }
 
-  `FindNeighbour`: the message replied by the neighbour node.  
-   message`Neighbours` contains 3 parameters:  
-   `from`: which node does the message send from.  
-   `neighbours`: the neighbour node.  
-   `timestamp`: the timestamp of message.
+  `FindNeighbour`: the message replied by the neighbour node.
+  message`Neighbours` contains 3 parameters:
+  `from`: which node does the message send from.
+  `neighbours`: the neighbour node.
+  `timestamp`: the timestamp of message.
 
         message Neighbours {
           Endpoint from = 1;
@@ -760,3 +794,11 @@ message `Return` has only one parameter:
          }
 
 # Please check detailed protocol document that may change with the iteration of the program at any time. Please refer to the latest version.
+
+```
+
+```
+
+```
+
+```
