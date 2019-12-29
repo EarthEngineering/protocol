@@ -25,6 +25,46 @@
    15. [TXInput](#TXInput)
    16. [Result](#Result)
 7. [Inventory](#inventory)
+8. [Items](#items)
+9. [InventoryItems](#inventoryitems)
+10. [BlockInventory](#blockinventory)
+11. [BlockId](#blockid)
+12. [ReasonCode](#reasoncode)
+13. [DisconnectMessage](#disconnectmessage)
+14. [HelloMessage](#hellomessage)
+15. [Wallet Service RPC and Blockchain Explorer](#wallet-service-rpc-and-blockchain-explorer)
+    1. [GetBalance](#getbalance)
+    2. [CreateTransaction](#createtransaction)
+    3. [BroadcastTransaction](#broadcasttransaction)
+    4. [CreateAccount](#createaccount)
+    5. [CreatAssetIssue](#creatassetissue)
+    6. [ListAccounts](#listaccounts)
+    7. [UpdateAccount](#updateaccount)
+    8. [VoteWitnessAccount](#votewitnessaccount)
+    9. [WitnessList](#witnesslist)
+    10. [UpdateWitness](#updatewitness)
+    11. [CreateWitness](#createwitness)
+    12. [TransferAsset](#transferasset)
+    13. [ParticipateAssetIssue](#participateassetissue)
+    14. [ListNodes](#listnodes)
+    15. [GetAssetIssueList](#getassetissuelist)
+    16. [GetAssetIssueByAccount](#getassetissuebyaccount)
+    17. [GetAssetIssueByName](#getassetissuebyname)
+    18. [GetNowBlock](#getnowblock)
+    19. [GetBlockByNum](#getblockbynum)
+    20. [TotalTransaction](#totaltransaction)
+16. [AccountList](#accountlist)
+17. [WitnessList](#witnesslist)
+18. [AssetIssueList](#assetissuelist)
+19. [NodeList](#nodelist)
+20. [Address](#address)
+21. [Return](#return)
+22. [Endpoint](#endpoint)
+23. [PingMessage](#pingmessage)
+24. [PongMessage](#pongmessage)
+25. [FindNeighbours](#findneighbours)
+26. [FindNeighbour](#findneighbour)
+27. [Credit](#credit)
 
 ## Intro
 
@@ -726,7 +766,7 @@ message`HelloMessage` contains 2 parameters:
 - `from`: the nodes that request for building connection.
 - `version`: the version when connection is built.
 
-## Wallet Service RPC and blockchain explorer
+## Wallet Service RPC and Blockchain Explorer
 
 `Wallet` service contains several RPCs.
 
