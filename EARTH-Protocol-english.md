@@ -1,5 +1,26 @@
 # EARTH protocol
 
+## Table of Contents
+
+1. [Intro](#intro)
+2. [Accounts](#accounts)
+3. [Witness](#witness)
+4. [Block](#block)
+5. [BlockHeader](#blockheader)
+6. [Transactions](#transactions)
+   1. [AccountCreateContract](#accountcreatecontract)
+   2. [AccountUpdateContract](#accountupdatecontract)
+   3. [TransferContract](#transfercontract)
+   4. [TransferAssetContract](#transferassetcontract)
+   5. [VoteAssetContract](#voteassetcontract)
+   6. [VoteWitnessContract](#votewitnesscontract)
+   7. [WitnessCreateContract](#witnesscreatecontract)
+   8. [WitnessUpdateContract](#witnessupdatecontract)
+   9. [AssetIssueContract](#assetissuecontract)
+   10. [ParticipateAssetIssueContract](#participateassetissuecontract)
+   11. [DeployContract](#deploycontract)
+   12. [Contract Types](#contracttypes)
+
 ## Intro
 
 - Defined by [Google Protobuf](https://developers.google.com/protocol-buffers)
@@ -108,7 +129,7 @@ message Block {
  }
 ```
 
-## Blockheader
+## BlockHeader
 
 A `BlockHeader` contains `raw_data` and `witness_signature`.
 
@@ -393,6 +414,8 @@ message `Contract` contains `type` and `parameter`.
 - `type`: what type of the message contract.
 - `parameter`: It can be any form.
 
+### Contract Types
+
 There are 8 different of contract types:
 
 - `AccountCreateContract`
@@ -411,10 +434,12 @@ There are 8 different of contract types:
 
 ```protobuf
 message Transaction {
+
   enum TranscationType {
     UtxoType = 0;
     ContractType = 1;
   }
+
   message Contract {
     enum ContractType {
       AccountCreateContract = 0;
@@ -431,6 +456,7 @@ message Transaction {
      ContractType type = 1;
      google.protobuf.Any parameter = 2;
   }
+
   message raw {
      TranscationType type = 2;
      repeated TXInput vin = 5;
@@ -441,6 +467,7 @@ message Transaction {
      bytes scripts = 16;
      int64 timestamp = 17;
   }
+
   raw raw_data = 1;
   repeated bytes signature = 5;
 }
