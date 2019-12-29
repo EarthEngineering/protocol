@@ -669,131 +669,141 @@ Get block by block number.
 
 Check out the total transaction.
 
-      service Wallet {
+```protobuf
+service Wallet {
+  rpc GetAccount (Account) returns (Account) {
+  };
 
-        rpc GetAccount (Account) returns (Account) {
+  rpc CreateTransaction (TransferContract) returns (Transaction) {
 
-        };
+  };
 
-        rpc CreateTransaction (TransferContract) returns (Transaction) {
+  rpc BroadcastTransaction (Transaction) returns (Return) {
 
-        };
+  };
 
-        rpc BroadcastTransaction (Transaction) returns (Return) {
+  rpc ListAccounts (EmptyMessage) returns (AccountList) {
 
-        };
+  };
 
-        rpc ListAccounts (EmptyMessage) returns (AccountList) {
+  rpc UpdateAccount (AccountUpdateContract) returns (Transaction) {
 
-        };
+  };
 
-        rpc UpdateAccount (AccountUpdateContract) returns (Transaction) {
+  rpc CreateAccount (AccountCreateContract) returns (Transaction) {
 
-        };
+  };
 
-        rpc CreateAccount (AccountCreateContract) returns (Transaction) {
+  rpc VoteWitnessAccount (VoteWitnessContract) returns (Transaction) {
 
-        };
+  };
 
-        rpc VoteWitnessAccount (VoteWitnessContract) returns (Transaction) {
+  rpc CreateAssetIssue (AssetIssueContract) returns (Transaction) {
 
-        };
+  };
 
-        rpc CreateAssetIssue (AssetIssueContract) returns (Transaction) {
+  rpc ListWitnesses (EmptyMessage) returns (WitnessList) {
 
-        };
+  };
 
-        rpc ListWitnesses (EmptyMessage) returns (WitnessList) {
+  rpc UpdateWitness (WitnessUpdateContract) returns (Transaction) {
 
-        };
+  };
 
-        rpc UpdateWitness (WitnessUpdateContract) returns (Transaction) {
+  rpc CreateWitness (WitnessCreateContract) returns (Transaction) {
 
-        };
+  };
 
-        rpc CreateWitness (WitnessCreateContract) returns (Transaction) {
+  rpc TransferAsset (TransferAssetContract) returns (Transaction) {
 
-        };
+  }
 
-        rpc TransferAsset (TransferAssetContract) returns (Transaction) {
+  rpc ParticipateAssetIssue (ParticipateAssetIssueContract) returns (Transaction) {
 
-        }
+  }
 
-        rpc ParticipateAssetIssue (ParticipateAssetIssueContract) returns (Transaction) {
+  rpc ListNodes (EmptyMessage) returns (NodeList) {
 
-        }
+  }
+  rpc GetAssetIssueList (EmptyMessage) returns (AssetIssueList) {
+  }
+  rpc GetAssetIssueByAccount (Account) returns (AssetIssueList) {
+  }
+  rpc GetAssetIssueByName (BytesMessage) returns (AssetIssueContract) {
 
-        rpc ListNodes (EmptyMessage) returns (NodeList) {
+  }
+  rpc GetNowBlock (EmptyMessage) returns (Block) {
 
-        }
-        rpc GetAssetIssueList (EmptyMessage) returns (AssetIssueList) {
+  }
+  rpc GetBlockByNum (NumberMessage) returns (Block) {
 
-        }
-        rpc GetAssetIssueByAccount (Account) returns (AssetIssueList) {
+  }
+  rpc TotalTransaction (EmptyMessage) returns (NumberMessage) {
 
-        }
-        rpc GetAssetIssueByName (BytesMessage) returns (AssetIssueContract) {
-
-        }
-        rpc GetNowBlock (EmptyMessage) returns (Block) {
-
-        }
-        rpc GetBlockByNum (NumberMessage) returns (Block) {
-
-        }
-        rpc TotalTransaction (EmptyMessage) returns (NumberMessage) {
-
-        }
-      };
+  }
+};
+```
 
 `AccountList`: the list of acounts in the blockchain explorer.
 message `AccountList` contains one parameter:
 `account`:
 
-       message AccountList {
-         repeated Account accounts = 1;
-       }
+```protobuf
+message AccountList {
+  repeated Account accounts = 1;
+}
+```
 
 `WitnessList`: the list of witnesses in the blockchain explorer.
 message `WitnessList` contains one parameter:
 `witnesses`:
 
-        message WitnessList {
-          repeated Witness witnesses = 1;
-        }
+```protobuf
+message WitnessList {
+  repeated Witness witnesses = 1;
+}
+```
 
 `AssetIssueList`: the list of issue asset in the blockchain explorer.
 message `AssetIssueList` contains one parameter:
 `assetIssue`:
 
-        message AssetIssueList {
-          repeated AssetIssueContract assetIssue = 1;
-        }
+```protobuf
+message AssetIssueList {
+  repeated AssetIssueContract assetIssue = 1;
+}
+```
 
 `NodeList`: the list of nodes in the node distribution map.
 message `NodeList` contains one parameter:
 `nodes`:
 
-         message NodeList {
-           repeated Node nodes = 1;
-         }
+```protobuf
+message NodeList {
+  repeated Node nodes = 1;
+}
+```
 
 `Address`: the address of nodes.
 message`Address` contains 2 parameters:
 `host`: the host of nodes.
 `port`: the port number of nodes.
 
-          message Address {
-            bytes host = 1;
-            int32 port = 2;
-          }
+```protobuf
+message Address {
+  bytes host = 1;
+  int32 port = 2;
+}
+```
 
 message `Return` has only one parameter:
 `result`: a bool flag.
 
-          message `Return` {
-            bool result = 1;
-          }
+```protobuf
+message `Return` {
+  bool result = 1;
+}
+```
 
 - The message structure of UDP.
 
@@ -803,80 +813,68 @@ message `Return` has only one parameter:
   `port`: the port number.
   `nodeId`:the ID of nodes.
 
-      message Endpoint {
-         bytes address = 1;
-         int32 port = 2;
-         bytes nodeId = 3;
-       }
-
-  `PingMessage`: the message sent from one node to another in the connecting process.
-  message`PingMessage` contains 4 parameters:
-  `from`: which node does the message send from.
-  `to`: which node will the message send to.
-  `version`: the version of the Internet.
-  `timestamp`: the timestamp of message.
-
-       message PingMessage {
-          Endpoint from = 1;
-          Endpoint to = 2;
-         int32 version = 3;
-         int64 timestamp = 4;
-        }
-
-  `PongMessage`: the message implies that nodes are connected.
-  message`PongMessage` contains 3 parameters:
-  `from`: which node does the message send from.
-  `echo`:
-  `timestamp`: the timestamp of message.
-
-        message PongMessage {
-          Endpoint from = 1;
-          int32 echo = 2;
-          int64 timestamp = 3;
-         }
-
-  `FindNeighbours`: the message sent from one node to find another one.
-  message`FindNeighbours` contains 3 parameters:
-  `from`: which node does the message send from.
-  `targetId`: the ID of targeted node.
-  `timestamp`: the timestamp of message.
-
-        message FindNeighbours {
-          Endpoint from = 1;
-          bytes targetId = 2;
-          int64 timestamp = 3;
-         }
-
-  `FindNeighbour`: the message replied by the neighbour node.
-  message`Neighbours` contains 3 parameters:
-  `from`: which node does the message send from.
-  `neighbours`: the neighbour node.
-  `timestamp`: the timestamp of message.
-
-        message Neighbours {
-          Endpoint from = 1;
-          repeated Endpoint neighbours = 2;
-          int64 timestamp = 3;
-         }
-
-# Please check detailed protocol document that may change with the iteration of the program at any time. Please refer to the latest version.
-
+```protobuf
+message Endpoint {
+   bytes address = 1;
+   int32 port = 2;
+   bytes nodeId = 3;
+ }
 ```
 
+`PingMessage`: the message sent from one node to another in the connecting process.
+message`PingMessage` contains 4 parameters:
+`from`: which node does the message send from.
+`to`: which node will the message send to.
+`version`: the version of the Internet.
+`timestamp`: the timestamp of message.
+
+```protobuf
+message PingMessage {
+   Endpoint from = 1;
+   Endpoint to = 2;
+  int32 version = 3;
+  int64 timestamp = 4;
+}
 ```
 
+`PongMessage`: the message implies that nodes are connected.
+message`PongMessage` contains 3 parameters:
+`from`: which node does the message send from.
+`echo`:
+`timestamp`: the timestamp of message.
+
+```protobuf
+message PongMessage {
+  Endpoint from = 1;
+  int32 echo = 2;
+  int64 timestamp = 3;
+}
 ```
 
+`FindNeighbours`: the message sent from one node to find another one.
+message`FindNeighbours` contains 3 parameters:
+`from`: which node does the message send from.
+`targetId`: the ID of targeted node.
+`timestamp`: the timestamp of message.
+
+```protobuf
+message FindNeighbours {
+  Endpoint from = 1;
+  bytes targetId = 2;
+  int64 timestamp = 3;
+}
 ```
 
-```
+`FindNeighbour`: the message replied by the neighbour node.
+message`Neighbours` contains 3 parameters:
+`from`: which node does the message send from.
+`neighbours`: the neighbour node.
+`timestamp`: the timestamp of message.
 
-```
-
-```
-
-```
-
-```
-
+```protobuf
+message Neighbours {
+  Endpoint from = 1;
+  repeated Endpoint neighbours = 2;
+  int64 timestamp = 3;
+}
 ```
