@@ -7,10 +7,10 @@
 
 3 种`Account`类型：`Normal`，`AssetIssue`，`Contract`。
 
-    enum AccountType { 
-      Normal = 0; 
-      AssetIssue = 1; 
-      Contract = 2; 
+    enum AccountType {
+      Normal = 0;
+      AssetIssue = 1;
+      Contract = 2;
      }
 
 一个`Account`包含 7 种参数：  
@@ -21,18 +21,18 @@
  `asset`：除 EARTH 以外账户上的其他资产——比如：_{<”WishToken”,66666>,<”Dogie”,233>}_。
 `latest_operation_time`: 该账户的最新活跃时间。
 
-    // Account 
-    message Account { 
-      message Vote { 
-        bytes vote_address = 1; 
-        int64 vote_count = 2; 
-       } 
-       bytes accout_name = 1; 
-       AccountType type = 2; 
-       bytes address = 3; 
-       int64 balance = 4; 
-       repeated Vote votes = 5; 
-       map<string, int64> asset = 6; 
+    // Account
+    message Account {
+      message Vote {
+        bytes vote_address = 1;
+        int64 vote_count = 2;
+       }
+       bytes accout_name = 1;
+       AccountType type = 2;
+       bytes address = 3;
+       int64 balance = 4;
+       repeated Vote votes = 5;
+       map<string, int64> asset = 6;
        int64 latest_operation_time = 10;
      }
 
@@ -46,17 +46,17 @@
  `latestBlockNum`：最新的区块高度——比如：_4522_。
 `isJobs`：布尔表类型标志位。
 
-    // Witness 
-    message Witness { 
-      bytes address = 1; 
-      int64 voteCount = 2; 
-      bytes pubKey = 3; 
-      string url = 4; 
-      int64 totalProduced = 5; 
-      int64 totalMissed = 6; 
+    // Witness
+    message Witness {
+      bytes address = 1;
+      int64 voteCount = 2;
+      bytes pubKey = 3;
+      string url = 4;
+      int64 totalProduced = 5;
+      int64 totalMissed = 6;
       int64 latestBlockNum = 7;
       bool isJobs = 9;
-      }
+     }
 
 - 一个区块由区块头和多笔交易构成。区块头包含时间戳，交易字典树的根，父哈希，签名等区块基本信息。
 
@@ -64,11 +64,11 @@
  `transactions`：区块里的交易信息。  
  `block_header`：区块的组成部分之一。
 
-    // block 
-    message Block { 
-      repeated Transaction transactions = 1; 
+    // block
+    message Block {
+      repeated Transaction transactions = 1;
       BlockHeader block_header = 2;
-      }
+     }
 
 `BlockHeader` 包括`raw_data`和`witness_signature`。  
  `raw_data`：`raw`信息。  
@@ -82,20 +82,20 @@ message `raw`包含 6 种参数：
  `witness_id`：验证节点的 id——比如：_“0xu82h…7237”_。  
  `witness_address`：验证节点的地址——比如：_“0xu82h…7237”_。
 
-    message BlockHeader { 
-      message raw { 
-        int64 timestamp = 1; 
-        bytes txTrieRoot = 2; 
-        bytes parentHash = 3; 
-        //bytes nonce = 5; 
-        //bytes difficulty = 6; 
-        uint64 number = 7; 
-        uint64 witness_id = 8; 
-        bytes witness_address = 9; 
-       } 
-       raw raw_data = 1; 
+    message BlockHeader {
+      message raw {
+        int64 timestamp = 1;
+        bytes txTrieRoot = 2;
+        bytes parentHash = 3;
+        //bytes nonce = 5;
+        //bytes difficulty = 6;
+        uint64 number = 7;
+        uint64 witness_id = 8;
+        bytes witness_address = 9;
+       }
+       raw raw_data = 1;
        bytes witness_signature = 2;
-      }
+     }
 
 消息体 `ChainInventory` 包括 `BlockId` 和 `remain_num`。  
  `BlockId`: block 的身份信息。  
@@ -114,7 +114,6 @@ A `BlockId` contains 2 parameters:
      int64 remain_num = 2;
      }
 
-
 - 交易合约有多种类型，包括账户创建合约、账户更新合约、转账合约、转账断言合约、资产投票合约、见证节点投票合约、见证节点创建合约、见证节点更新合约、资产发布合约、参与资产发布和与部署合约 11 种类型。
 
 `AccountCreatContract`包含 3 种参数：  
@@ -122,10 +121,10 @@ A `BlockId` contains 2 parameters:
  `account_name`： 账户名称——比如： _"SiCongsaccount”_。  
  `owner_address`：合约持有人地址——比如： _“0xu82h…7237”_。
 
-    message AccountCreateContract { 
-      AccountType type = 1; 
-      bytes account_name = 2; 
-      bytes owner_address = 3; 
+    message AccountCreateContract {
+      AccountType type = 1;
+      bytes account_name = 2;
+      bytes owner_address = 3;
      }
 
 `AccountUpdateContract`包含 2 种参数：  
@@ -137,17 +136,16 @@ A `BlockId` contains 2 parameters:
       bytes owner_address = 2;
      }
 
-
 `TransferContract`包含 3 种参数：  
  `amount`：EARTH 数量——比如：_12534_。  
  `to_address`： 接收方地址——比如：_“0xu82h…7237”_。  
  `owner_address`：合约持有人地址——比如：_“0xu82h…7237”_。
 
-    message TransferContract { 
-      bytes owner_address = 1; 
-      bytes to_address = 2; 
+    message TransferContract {
+      bytes owner_address = 1;
+      bytes to_address = 2;
       int64 amount = 3;
-      }
+     }
 
 `TransferAssetContract`包含 4 种参数：  
  `asset_name`：资产名称——比如：_”SiCongsaccount”_。  
@@ -155,11 +153,11 @@ A `BlockId` contains 2 parameters:
  `owner_address`：合约持有人地址——比如：_“0xu82h…7237”_。  
  `amount`：目标资产数量——比如：_12353_。
 
-    message TransferAssetContract { 
-      bytes asset_name = 1; 
-      bytes owner_address = 2; 
-      bytes to_address = 3; 
-      int64 amount = 4; 
+    message TransferAssetContract {
+      bytes asset_name = 1;
+      bytes owner_address = 2;
+      bytes to_address = 3;
+      int64 amount = 4;
      }
 
 `VoteAssetContract`包含 4 种参数：  
@@ -168,10 +166,10 @@ A `BlockId` contains 2 parameters:
  `owner_address`：合约持有人地址——比如：_“0xu82h…7237”_。  
  `count`：投票数目——比如：_2324234_。
 
-    message VoteAssetContract { 
-      bytes owner_address = 1; 
-      repeated bytes vote_address = 2; 
-      bool support = 3; 
+    message VoteAssetContract {
+      bytes owner_address = 1;
+      repeated bytes vote_address = 2;
+      bool support = 3;
       int32 count = 5;
      }
 
@@ -181,11 +179,11 @@ A `BlockId` contains 2 parameters:
  `owner_address`：合约持有人地址——比如：_“0xu82h…7237”_。  
  `count`：投票数目——比如：_32632_。
 
-    message VoteWitnessContract { 
-      bytes owner_address = 1; 
-      repeated bytes vote_address = 2; 
-      bool support = 3; 
-      int32 count = 5; 
+    message VoteWitnessContract {
+      bytes owner_address = 1;
+      repeated bytes vote_address = 2;
+      bool support = 3;
+      int32 count = 5;
      }
 
 `WitnessCreateContract`包含 3 种参数：  
@@ -193,11 +191,11 @@ A `BlockId` contains 2 parameters:
  `owner_address`：合约持有人地址——比如：_“0xu82h…7237”_。  
  `url`：合约的 url 链接。
 
-    message WitnessCreateContract { 
-      bytes owner_address = 1; 
-      bytes private_key = 2; 
+    message WitnessCreateContract {
+      bytes owner_address = 1;
+      bytes private_key = 2;
       bytes url = 12;
-      }
+     }
 
 `WitnessUpdateContract`包含 2 种参数：  
  `owner_address`：合约持有人地址——比如：_“0xu82h…7237”_。  
@@ -220,19 +218,18 @@ A `BlockId` contains 2 parameters:
  `description`：合约的描述——比如：_”earthdada”_。  
  `url`：合约的 url 地址链接。
 
-    message AssetIssueContract { 
-      bytes owner_address = 1; 
-      bytes name = 2; 
-      int64 total_supply = 4; 
-      int32 earth_num = 6; 
-      int32 num = 8; 
-      int64 start_time = 9; 
-      int64 end_time = 10; 
-      int32 vote_score = 16; 
-      bytes description = 20; 
-      bytes url = 21; 
+    message AssetIssueContract {
+      bytes owner_address = 1;
+      bytes name = 2;
+      int64 total_supply = 4;
+      int32 earth_num = 6;
+      int32 num = 8;
+      int64 start_time = 9;
+      int64 end_time = 10;
+      int32 vote_score = 16;
+      bytes description = 20;
+      bytes url = 21;
      }
-
 
 `ParticipateAssetIssueContract`包含 4 种参数：  
  `owner_address`：合约持有人地址——比如：_“0xu82h…7237”_。  
@@ -244,9 +241,9 @@ A `BlockId` contains 2 parameters:
  `script`：脚本。  
  `owner_address`：合约持有人地址——比如：_“0xu82h…7237”_。
 
-    message DeployContract { 
-      bytes owner_address = 1; 
-      bytes script = 2; 
+    message DeployContract {
+      bytes owner_address = 1;
+      bytes script = 2;
      }
 
 消息体 `Result` 包含 `fee` and `ret`2 个参数.  
@@ -254,8 +251,8 @@ A `BlockId` contains 2 parameters:
  `fee`: 交易扣除的费用。
 
 `code`是`ret`的类型定义，有`SUCCESS`和`FAILED`两种类型。
-  
- message Result {
+
+message Result {
 enum code {
 SUCESS = 0;
 FAILED = 1;
@@ -288,54 +285,54 @@ code ret = 2;
 
 `TransactionType`包括`UtxoType`和`ContractType`。
 
-    message Transaction { 
-      enum TranscationType { 
-        UtxoType = 0; 
-        ContractType = 1; 
-       } 
-       message Contract { 
-         enum ContractType { 
-           AccountCreateContract = 0; 
-           TransferContract = 1; 
-           TransferAssetContract = 2; 
-           VoteAssetContract = 3; 
-           VoteWitnessContract = 4; 
-           WitnessCreateContract = 5; 
-           AssetIssueContract = 6; 
-           DeployContract = 7; 
-          } 
-          ContractType type = 1; 
-          google.protobuf.Any parameter = 2; 
-        } 
-        message raw { 
-          TranscationType type = 2; 
-          repeated TXInput vin = 5; 
-          repeated TXOutput vout = 7; 
-          int64 expiration = 8; 
-          bytes data = 10; 
-          repeated Contract contract = 11; 
-          bytes scripts = 16; 
+    message Transaction {
+      enum TranscationType {
+        UtxoType = 0;
+        ContractType = 1;
+       }
+       message Contract {
+         enum ContractType {
+           AccountCreateContract = 0;
+           TransferContract = 1;
+           TransferAssetContract = 2;
+           VoteAssetContract = 3;
+           VoteWitnessContract = 4;
+           WitnessCreateContract = 5;
+           AssetIssueContract = 6;
+           DeployContract = 7;
+          }
+          ContractType type = 1;
+          google.protobuf.Any parameter = 2;
+        }
+        message raw {
+          TranscationType type = 2;
+          repeated TXInput vin = 5;
+          repeated TXOutput vout = 7;
+          int64 expiration = 8;
+          bytes data = 10;
+          repeated Contract contract = 11;
+          bytes scripts = 16;
           in64 timestamp = 17;
-         } 
-         raw raw_data = 1; 
-         repeated bytes signature = 5; 
+         }
+         raw raw_data = 1;
+         repeated bytes signature = 5;
      }
 
 消息体 `TXOutputs`由`outputs`构成。  
  `outputs`: 元素为`TXOutput`的数组。
 
-    message TXOutputs { 
+    message TXOutputs {
       repeated TXOutput outputs = 1;
-      }
+     }
 
 消息体 `TXOutput`包括`value`和`pubKeyHash`。  
  `value`：输出值。  
  `pubKeyhash`：公钥的哈希。
 
-    message TXOutput { 
-      int64 value = 1; 
+    message TXOutput {
+      int64 value = 1;
       bytes pubKeyHash = 2;
-      }
+     }
 
 消息体 `TXIutput`包括`raw_data`和`signature`。  
  `raw_data`：消息体`raw`。  
@@ -346,14 +343,14 @@ code ret = 2;
  `Vout`：上一个输出的值。  
  `pubkey`:公钥。
 
-    message TXInput { 
-      message raw { 
-        bytes txID = 1; 
-        int64 vout = 2; 
-        bytes pubKey = 3; 
-       } 
-       raw raw_data = 1; 
-       bytes signature = 4; }
+    message TXInput {
+      message raw {
+        bytes txID = 1;
+        int64 vout = 2;
+        bytes pubKey = 3;
+       }
+       raw raw_data = 1;
+       bytes signature = 4;}
 
 - 传输涉及的协议 Inventory 主要用于传输中告知接收方传输数据的清单。
 
@@ -365,15 +362,15 @@ code ret = 2;
  `EARTH`：交易。  
  `BLOCK`：区块。
 
-    // Inventory 
-    message Inventory { 
-      enum InventoryType { 
-        EARTH = 0; 
-        BLOCK = 1; 
-       } 
-       InventoryType type = 1; 
+    // Inventory
+    message Inventory {
+      enum InventoryType {
+        EARTH = 0;
+        BLOCK = 1;
+       }
+       InventoryType type = 1;
        repeated bytes ids = 2;
-      }
+     }
 
 消息体 `Items`包含 4 种参数：  
  `type`：物品类型——比如：_1_ 代表 `EARTH`。  
@@ -387,51 +384,50 @@ code ret = 2;
  `BLOCK`：区块。  
  `BLOCKHEADER`：区块头。
 
-    message Items { 
-      enum ItemType { 
-        ERR = 0; 
-        EARTH = 1; 
-        BLOCK = 2; 
-        BLOCKHEADER = 3; 
-       } 
-       ItemType type = 1; 
-       repeated Block blocks = 2; 
-       repeated BlockHeader block_headers = 3; 
-       repeated Transaction transactions = 4; 
+    message Items {
+      enum ItemType {
+        ERR = 0;
+        EARTH = 1;
+        BLOCK = 2;
+        BLOCKHEADER = 3;
+       }
+       ItemType type = 1;
+       repeated Block blocks = 2;
+       repeated BlockHeader block_headers = 3;
+       repeated Transaction transactions = 4;
      }
 
 `Inventory`包含`type`和`items`。  
  `type`：物品种类。  
  `items`：物品清单。
 
-    message InventoryItems { 
-      int32 type = 1; 
-      repeated bytes items = 2; 
+    message InventoryItems {
+      int32 type = 1;
+      repeated bytes items = 2;
      }
-
 
 消息体 `BlockInventory` 包含 `type`。  
  `type`: 清单种类.
 
 有三种类型:`SYNC`, `ADVTISE`, `FETCH`。
-  
- // Inventory
+
+// Inventory
 message BlockInventory {
 enum Type {
 SYNC = 0;
 ADVTISE = 1;
 FETCH = 2;
 }
-  
- 消息体 `BlockId` 包括 `ids` and `type`。  
+
+消息体 `BlockId` 包括 `ids` and `type`。  
  `ids`: 区块身份信息。  
  `type`: 区块类型。
-  
- `ids` 包含 2 种参数：  
+
+`ids` 包含 2 种参数：  
  `hash`: 区块的哈希值。  
  `number`: 哈希值和区块高度即为当前区块号。
-  
- message BlockId {
+
+message BlockId {
 bytes hash = 1;
 int64 number = 2;
 }
@@ -473,7 +469,6 @@ Type type = 2;
         RESET = 16;
         UNKNOWN = 255;
       }
-
 
 消息体`DisconnectMessage`包含`reason`。  
  `DisconnectMessage`：断开连接是的消息。  
@@ -595,46 +590,43 @@ Type type = 2;
 `WitnessList`：区块链浏览器中的见证节点列表。  
  消息体 `WitnessList` 包含 1 个参数：  
  `witnesses`：
-  
- message WitnessList {
+
+message WitnessList {
 repeated Witness witnesses = 1;
 }
-  
- `AssetIssueList`：区块链浏览器中的发布资产列表。  
+
+`AssetIssueList`：区块链浏览器中的发布资产列表。  
  消息体 `AssetIssueList` 包含 1 个参数:  
  `assetIssue`：
-  
- message AssetIssueList {
+
+message AssetIssueList {
 repeated AssetIssueContract assetIssue = 1;
 }
-  
-  
- `NodeList`： 分布节点图中的节点列表。  
+
+`NodeList`： 分布节点图中的节点列表。  
  消息体 `NodeList` 包含 1 个参数：  
  `nodes`：
-  
- message NodeList {
+
+message NodeList {
 repeated Node nodes = 1;
 }
-  
- `Address`: 节点地址。  
+
+`Address`: 节点地址。  
  消息体`Address` 包含 2 个参数：  
  `host`：节点所有者。  
  `port`：节点的端口号。
-  
- message Address {
+
+message Address {
 bytes host = 1;
 int32 port = 2;
 }
-  
-  
- 消息体`Return`只含有一个参数：  
+
+消息体`Return`只含有一个参数：  
  `result`: 布尔表类型标志位。
 
-              message `Return` { 
-                 bool result = 1; 
+              message `Return` {
+                 bool result = 1;
               }
-
 
 - 网络 UDP 消息结构。
 
@@ -699,6 +691,5 @@ int32 port = 2;
       repeated Endpoint neighbours = 2;
       int64 timestamp = 3;
      }
-
 
 # 详细的协议见附属文件。详细协议随着程序的迭代随时都可能发生变化，请以最新的版本为准。
