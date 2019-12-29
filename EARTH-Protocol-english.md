@@ -1,60 +1,95 @@
 # EARTH protocol
 
+## Intro
+
 - Defined by [Google Protobuf](https://developers.google.com/protocol-buffers)
-- There are 3 types of account—basic account, asset release account and contract account, and attributes included in each account are name, types, address, balance and related asset.
-- A basic account is able to apply to be a validation node, which has serval parameters, including extra attributes, public key, URL, voting statistics, history performance, etc.
+- There are 3 types of account
+  - basic account
+  - asset release account
+  - contract account
+- Attributes included in each account are
+  - name
+  - types
+  - address
+  - balance
+  - related asset
+- A basic account is able to apply to be a validation node, which has serval parameters including
 
-  There are three different `Account types`: `Normal`, `AssetIssue`, `Contract`.
+  - extra attributes
+  - public key
+  - URL
+  - voting statistics
+  - history performance
+  - and more...
 
-      enum AccountType {
-         Normal = 0;
-         AssetIssue = 1;
-         Contract = 2;
-       }
+## Accounts
 
-  An `Account` contains 7 parameters:  
-   `account_name`: the name for this account – e.g. “_BillsAccount_”.  
-   `type`: what type of this account is – e.g. _0_ stands for type `Normal`.  
-   `balance`: balance of this account – e.g. _4213312_.  
-   `votes`: received votes on this account – e.g. _{(“0x1b7w…9xj3”,323), (“0x8djq…j12m”,88),…,(“0x82nd…mx6i”,10001)}_.  
-   `asset`: other assets expect EARTH in this account – e.g. _{<“WishToken”,66666>,<”Dogie”,233>}_.
-  `latest_operation_time`: the latest operation time of this account.
+There are three different `Account types`:
 
-      // Account
-      message Account {
-        message Vote {
-           bytes vote_address = 1;
-           int64 vote_count = 2;  }
-        bytes accout_name = 1;
-        AccountType type = 2;
-        bytes address = 3;
-        int64 balance = 4;
-        repeated Vote votes = 5;
-        map<string, int64> asset = 6;
-        int64 latest_operation_time = 10;
-       }
+- `Normal`
+- `AssetIssue`
+- `Contract`
 
-A `Witness` contains 8 parameters:  
- `address`: the address of this witness – e.g. “_0xu82h…7237_”.  
- `voteCount`: number of received votes on this witness – e.g. _234234_.  
- `pubKey`: the public key for this witness – e.g. “_0xu82h…7237_”.  
- `url`: the url for this witness – e.g. “_https://www.earth.engineering_”.  
- `totalProduced`: the number of blocks this witness produced – e.g. _2434_.  
- `totalMissed`: the number of blocks this witness missed – e.g. _7_.  
- `latestBlockNum`: the latest height of block – e.g. _4522_.
-`isjobs`: a bool flag.
+```protobuf
+enum AccountType {
+   Normal = 0;
+   AssetIssue = 1;
+   Contract = 2;
+ }
+```
 
-      // Witness
-      message Witness{
-        bytes address = 1;
-        int64 voteCount = 2;
-        bytes pubKey = 3;
-        string url = 4;
-        int64 totalProduced = 5;
-        int64 totalMissed = 6;
-        int64 latestBlockNum = 7;
-        bool isJobs = 9;
-       }
+An `Account` contains 7 parameters:
+
+- `account_name`: the name for this account – e.g. “_BillsAccount_”.
+- `type`: what type of this account is – e.g. _0_ stands for type `Normal`.
+- `balance`: balance of this account – e.g. _4213312_.
+- `votes`: received votes on this account – e.g. _{(“0x1b7w…9xj3”,323), (“0x8djq…j12m”,88),…,(“0x82nd…mx6i”,10001)}_.
+- `asset`: other assets expect EARTH in this account – e.g. _{<“WishToken”,66666>,<”Dogie”,233>}_.
+- `latest_operation_time`: the latest operation time of this account.
+
+```protobuf
+// Account
+message Account {
+  message Vote {
+    bytes vote_address = 1;
+    int64 vote_count = 2;
+  }
+  bytes accout_name = 1;
+  AccountType type = 2;
+  bytes address = 3;
+  int64 balance = 4;
+  repeated Vote votes = 5;
+  map<string, int64> asset = 6;
+  int64 latest_operation_time = 10;
+}
+```
+
+## Witness
+
+A `Witness` contains 8 parameters:
+
+- `address`: the address of this witness – e.g. “_0xu82h…7237_”.
+- `voteCount`: number of received votes on this witness – e.g. _234234_.
+- `pubKey`: the public key for this witness – e.g. “_0xu82h…7237_”.
+- `url`: the url for this witness – e.g. “_https://www.earth.engineering_”.
+- `totalProduced`: the number of blocks this witness produced – e.g. _2434_.
+- `totalMissed`: the number of blocks this witness missed – e.g. _7_.
+- `latestBlockNum`: the latest height of block – e.g. _4522_.
+- `isjobs`: a bool flag.
+
+```protobuf
+  // Witness
+  message Witness{
+    bytes address = 1;
+    int64 voteCount = 2;
+    bytes pubKey = 3;
+    string url = 4;
+    int64 totalProduced = 5;
+    int64 totalMissed = 6;
+    int64 latestBlockNum = 7;
+    bool isJobs = 9;
+  }
+```
 
 - A block typically contains transaction data and a blockheader, which is a list of basic block information, including timestamp, signature, parent hash, root of Merkle tree and so on.
 
