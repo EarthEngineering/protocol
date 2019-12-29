@@ -460,7 +460,7 @@ message `Contract` contains `type` and `parameter`.
 
 ### Contract Types
 
-There are 8 different of contract types:
+There are 8 different contract types:
 
 - `AccountCreateContract`
 - `TransferContract`
@@ -471,7 +471,7 @@ There are 8 different of contract types:
 - `AssetIssueContract`
 - `DeployContract`
 
-`TransactionType` have two types:
+`TransactionType` has two types:
 
 - `UtxoType`
 - `ContractType`
