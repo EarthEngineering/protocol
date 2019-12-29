@@ -69,18 +69,17 @@
 ## Intro
 
 - Defined by [Google Protobuf](https://developers.google.com/protocol-buffers)
-- There are 3 types of account
+- 3 types of account
   - basic account
   - asset release account
   - contract account
-- Attributes included in each account are
+- Attributes included in each account
   - name
   - types
   - address
   - balance
   - related asset
 - A basic account is able to apply to be a validation node, which has serval parameters including
-
   - extra attributes
   - public key
   - URL
@@ -90,7 +89,7 @@
 
 ## Accounts
 
-There are three different `Account types`:
+There are three different `Account` types:
 
 - `Normal`
 - `AssetIssue`
