@@ -344,193 +344,216 @@ message DeployContract {
       There are 8 different of contract types: `AccountCreateContract`, `TransferContract`, `TransferAssetContract`, `VoteAssetContract`, `VoteWitnessContract`,`WitnessCreateContract`, `AssetIssueContract` and `DeployContract`.
       `TransactionType` have two types: `UtxoType` and `ContractType`.
 
-          message Transaction {
-            enum TranscationType {
-              UtxoType = 0;
-              ContractType = 1;
-             }
-             message Contract {
-               enum ContractType {
-                 AccountCreateContract = 0;
-                 TransferContract = 1;
-                 TransferAssetContract = 2;
-                 VoteAssetContract = 3;
-                 VoteWitnessContract = 4;
-                 WitnessCreateContract = 5;
-                 AssetIssueContract = 6;
-                 DeployContract = 7;
-                 WitnessUpdateContract = 8;
-                 ParticipateAssetIssueContract = 9
-                }
-                ContractType type = 1;
-                google.protobuf.Any parameter = 2;
-              }
-              message raw {
-                TranscationType type = 2;
-                repeated TXInput vin = 5;
-                repeated TXOutput vout = 7;
-                int64 expiration = 8;
-                bytes data = 10;
-                repeated Contract contract = 11;
-                bytes scripts = 16;
-                int64 timestamp = 17;
-               }
-               raw raw_data = 1;
-               repeated bytes signature = 5;
-           }
+```protobuf
+message Transaction {
+  enum TranscationType {
+    UtxoType = 0;
+    ContractType = 1;
+  }
+  message Contract {
+    enum ContractType {
+      AccountCreateContract = 0;
+      TransferContract = 1;
+      TransferAssetContract = 2;
+      VoteAssetContract = 3;
+      VoteWitnessContract = 4;
+      WitnessCreateContract = 5;
+      AssetIssueContract = 6;
+      DeployContract = 7;
+      WitnessUpdateContract = 8;
+      ParticipateAssetIssueContract = 9
+     }
+     ContractType type = 1;
+     google.protobuf.Any parameter = 2;
+  }
+  message raw {
+     TranscationType type = 2;
+     repeated TXInput vin = 5;
+     repeated TXOutput vout = 7;
+     int64 expiration = 8;
+     bytes data = 10;
+     repeated Contract contract = 11;
+     bytes scripts = 16;
+     int64 timestamp = 17;
+  }
+  raw raw_data = 1;
+  repeated bytes signature = 5;
+}
+```
 
-      message `TXOutputs` contains `outputs`.
-      `outputs`: an array of `TXOutput`.
+message `TXOutputs` contains `outputs`.
+`outputs`: an array of `TXOutput`.
 
-          message TXOutputs {
-             repeated TXOutput outputs = 1;
-           }
+```protobuf
+message TXOutputs {
+   repeated TXOutput outputs = 1;
+}
+```
 
-      message `TXOutput` contains `value` and `pubKeyHash`.
-      `value`: output value.
-      `pubKeyHash`: Hash of public key
+message `TXOutput` contains `value` and `pubKeyHash`.
+`value`: output value.
+`pubKeyHash`: Hash of public key
 
-          message TXOutput {
-             int64 value = 1;
-             bytes pubKeyHash = 2;
-           }
+```protobuf
+message TXOutput {
+   int64 value = 1;
+   bytes pubKeyHash = 2;
+}
+```
 
-      message `TXInput` contains `raw_data` and `signature`.
-      `raw_data`: a message `raw`.
-      `signature`: signature for this `TXInput`.
+message `TXInput` contains `raw_data` and `signature`.
+`raw_data`: a message `raw`.
+`signature`: signature for this `TXInput`.
 
-      message `raw` contains `txID`, `vout` and `pubKey`.
-      `txID`: transaction ID.
-      `vout`: value of last output.
-      `pubKey`: public key.
+message `raw` contains `txID`, `vout` and `pubKey`.
+`txID`: transaction ID.
+`vout`: value of last output.
+`pubKey`: public key.
 
-          message TXInput {
-             message raw {
-             bytes txID = 1;
-             int64 vout = 2;
-             bytes pubKey = 3;
-           }
-           raw raw_data = 1;
-           bytes signature = 4;
-           }
+```protobuf
+message TXInput {
+    message raw {
+    bytes txID = 1;
+    int64 vout = 2;
+    bytes pubKey = 3;
+  }
+  raw raw_data = 1;
+  bytes signature = 4;
+}
+```
 
-       message `Result` contains `fee` and `ret`.
-       `ret`: the state of transaction.
-       `fee`: the fee for transaction.
+message `Result` contains `fee` and `ret`.
+`ret`: the state of transaction.
+`fee`: the fee for transaction.
 
-       `code` is definition of `ret` and contains 2 types：`SUCCESS` and `FAILED`.
+`code` is definition of `ret` and contains 2 types：`SUCCESS` and `FAILED`.
 
-          message Result {
-            enum code {
-              SUCESS = 0;
-              FAILED = 1;
-            }
-            int64 fee = 1;
-            code ret = 2;
-          }
+```protobuf
+message Result {
+  enum code {
+    SUCESS = 0;
+    FAILED = 1;
+  }
+  int64 fee = 1;
+  code ret = 2;
+}
+```
 
-* Inventory is mainly used to inform peer nodes the list of items.
+## Inventory
 
-  `Inventory` contains `type` and `ids`.
-  `type`: what type this `Inventory` is. – e.g. _0_ stands for `EARTH`.
-  `ids`: ID of things in this `Inventory`.
+Inventory is mainly used to inform peer nodes the list of items.
 
-  Two `Inventory` types: `EARTH` and `BLOCK`.
-  `EARTH`: transaction.
-  `BLOCK`: block.
+`Inventory` contains `type` and `ids`.
+`type`: what type this `Inventory` is. – e.g. _0_ stands for `EARTH`.
+`ids`: ID of things in this `Inventory`.
 
-      // Inventory
-      message Inventory {
-        enum InventoryType {
-          EARTH = 0;
-          BLOCK = 1;
-         }
-         InventoryType type = 1;
-         repeated bytes ids = 2;
-       }
+Two `Inventory` types: `EARTH` and `BLOCK`.
+`EARTH`: transaction.
+`BLOCK`: block.
 
-  message `Items` contains 4 parameters:
-  `type`: type of items – e.g. _1_ stands for `EARTH`.
-  `blocks`: blocks in `Items` if there is any.
-  `block_headers`: block headers if there is any.
-  `transactions`: transactions if there is any.
+```protobuf
+// Inventory
+message Inventory {
+  enum InventoryType {
+    EARTH = 0;
+    BLOCK = 1;
+   }
+   InventoryType type = 1;
+   repeated bytes ids = 2;
+}
+```
 
-  `Items` have four types: `ERR`, `EARTH`, `BLOCK` and `BLOCKHEADER`.
-  `ERR`: error.
-  `EARTH`: transaction.
-  `BLOCK`: block.
-  `BLOCKHEADER`: block header.
+message `Items` contains 4 parameters:
+`type`: type of items – e.g. _1_ stands for `EARTH`.
+`blocks`: blocks in `Items` if there is any.
+`block_headers`: block headers if there is any.
+`transactions`: transactions if there is any.
 
-      message Items {
-        enum ItemType {
-          ERR = 0;
-          EARTH = 1;
-          BLOCK = 2;
-          BLOCKHEADER = 3;
-         }
-         ItemType type = 1;
-         repeated Block blocks = 2;
-         repeated BlockHeader
-         block_headers = 3;
-         repeated Transaction transactions = 4;
-       }
+`Items` have four types: `ERR`, `EARTH`, `BLOCK` and `BLOCKHEADER`.
+`ERR`: error.
+`EARTH`: transaction.
+`BLOCK`: block.
+`BLOCKHEADER`: block header.
 
-  `InventoryItems` contains `type` and `items`.
-  `type`: what type of item.
-  `items`: items in an `InventoryItems`.
+```protobuf
+message Items {
+  enum ItemType {
+    ERR = 0;
+    EARTH = 1;
+    BLOCK = 2;
+    BLOCKHEADER = 3;
+  }
+  ItemType type = 1;
+  repeated Block blocks = 2;
+  repeated BlockHeader
+  block_headers = 3;
+  repeated Transaction transactions = 4;
+}
+```
 
-      message InventoryItems {
-        int32 type = 1;
-        repeated bytes items = 2;
-       }
+`InventoryItems` contains `type` and `items`.
+`type`: what type of item.
+`items`: items in an `InventoryItems`.
 
-  message `BlockInventory` contains `type`.
-  `type`: what type of inventory.
+```protobuf
+message InventoryItems {
+  int32 type = 1;
+  repeated bytes items = 2;
+}
+```
 
-  There are 3 types:`SYNC`, `ADVTISE`, `FETCH`.
+message `BlockInventory` contains `type`.
+`type`: what type of inventory.
 
-      // Inventory
-       message BlockInventory {
-         enum Type {
-           SYNC = 0;
-           ADVTISE = 1;
-           FETCH = 2;
-         }
+There are 3 types:`SYNC`, `ADVTISE`, `FETCH`.
 
-  message `BlockId` contains `ids` and `type`.
-  `ids`: the identification of block.
-  `type`: what type of the block.
+```protobuf
+// Inventory
+message BlockInventory {
+  enum Type {
+    SYNC = 0;
+    ADVTISE = 1;
+    FETCH = 2;
+  }
+}
+```
 
-  `ids` contains 2 paremeters:
-  `hash`: the hash of block.
-  `number`: the hash and height of block.
+message `BlockId` contains `ids` and `type`.
+`ids`: the identification of block.
+`type`: what type of the block.
 
-       message BlockId {
-          bytes hash = 1;
-          int64 number = 2;
-        }
-        repeated BlockId ids = 1;
-        Type type = 2;
-       }
+`ids` contains 2 paremeters:
+`hash`: the hash of block.
+`number`: the hash and height of block.
 
-  `ReasonCode`: the type of reason.
+```protobuf
+message BlockId {
+   bytes hash = 1;
+   int64 number = 2;
+}
+  repeated BlockId ids = 1;
+  Type type = 2;
+}
+```
 
-  `ReasonCode` contains 15 types of disconnect reasons:
-  `REQUESTED`
-  `TCP_ERROR`
-  `BAD_PROTOCOL`
-  `USELESS_PEER`
-  `TOO_MANY_PEERS`
-  `DUPLICATE_PEER`
-  `INCOMPATIBLE_PROTOCOL`
-  `NULL_IDENTITY`
-  `PEER_QUITING`
-  `UNEXPECTED_IDENTITY`
-  `LOCAL_IDENTITY`
-  `PING_TIMEOUT`
-  `USER_REASON`
-  `RESET`
-  `UNKNOWN`
+`ReasonCode`: the type of reason.
+
+`ReasonCode` contains 15 types of disconnect reasons:
+`REQUESTED`
+`TCP_ERROR`
+`BAD_PROTOCOL`
+`USELESS_PEER`
+`TOO_MANY_PEERS`
+`DUPLICATE_PEER`
+`INCOMPATIBLE_PROTOCOL`
+`NULL_IDENTITY`
+`PEER_QUITING`
+`UNEXPECTED_IDENTITY`
+`LOCAL_IDENTITY`
+`PING_TIMEOUT`
+`USER_REASON`
+`RESET`
+`UNKNOWN`
 
       enum ReasonCode {
         REQUESTED = 0;
@@ -550,16 +573,16 @@ message DeployContract {
         UNKNOWN = 255;
       }
 
-  message`DisconnectMessage` contains `reason`.
-  `DisconnectMessage`: the message when disconnection occurs.
-  `reason`: the reason for disconnecting.
+message`DisconnectMessage` contains `reason`.
+`DisconnectMessage`: the message when disconnection occurs.
+`reason`: the reason for disconnecting.
 
-  message`HelloMessage` contains 2 parameters:
-  `HelloMessage`: the message for building connection.
-  `from`: the nodes that request for building connection.
-  `version`: the version when connection is built.
+message`HelloMessage` contains 2 parameters:
+`HelloMessage`: the message for building connection.
+`from`: the nodes that request for building connection.
+`version`: the version when connection is built.
 
-* Wallet Service RPC and blockchain explorer
+- Wallet Service RPC and blockchain explorer
 
 `Wallet` service contains several RPCs.
 **`GetBalance`** :
@@ -794,6 +817,14 @@ message `Return` has only one parameter:
          }
 
 # Please check detailed protocol document that may change with the iteration of the program at any time. Please refer to the latest version.
+
+```
+
+```
+
+```
+
+```
 
 ```
 
