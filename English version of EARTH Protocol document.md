@@ -18,7 +18,7 @@
    `type`: what type of this account is – e.g. _0_ stands for type `Normal`.  
    `balance`: balance of this account – e.g. _4213312_.  
    `votes`: received votes on this account – e.g. _{(“0x1b7w…9xj3”,323), (“0x8djq…j12m”,88),…,(“0x82nd…mx6i”,10001)}_.  
-   `asset`: other assets expect TRX in this account – e.g. _{<“WishToken”,66666>,<”Dogie”,233>}_.
+   `asset`: other assets expect EARTH in this account – e.g. _{<“WishToken”,66666>,<”Dogie”,233>}_.
   `latest_operation_time`: the latest operation time of this account.
 
       // Account 
@@ -136,7 +136,7 @@ A `Witness` contains 8 parameters:
         }
 
   A `TransferContract` contains 3 parameters:  
-   `amount`: the amount of TRX – e.g. _12534_.  
+   `amount`: the amount of EARTH – e.g. _12534_.  
    `to_address`: the receiver address – e.g. “_0xu82h…7237_”.  
    `owner_address`: the address of contract owner – e.g. “_0xu82h…7237_”.
 
@@ -374,7 +374,7 @@ A `DeployContract` contains 2 parameters:
       // Inventory 
       message Inventory { 
         enum InventoryType { 
-          TRX = 0; 
+          EARTH = 0; 
           BLOCK = 1; 
          } 
          InventoryType type = 1; 
@@ -382,21 +382,21 @@ A `DeployContract` contains 2 parameters:
        }
 
   message `Items` contains 4 parameters:  
-  `type`: type of items – e.g. _1_ stands for `TRX`.  
+  `type`: type of items – e.g. _1_ stands for `EARTH`.  
   `blocks`: blocks in `Items` if there is any.  
   `block_headers`: block headers if there is any.  
   `transactions`: transactions if there is any.
 
-  `Items` have four types: `ERR`, `TRX`, `BLOCK` and `BLOCKHEADER`.  
+  `Items` have four types: `ERR`, `EARTH`, `BLOCK` and `BLOCKHEADER`.  
   `ERR`: error.  
-  `TRX`: transaction.  
+  `EARTH`: transaction.  
   `BLOCK`: block.  
   `BLOCKHEADER`: block header.
 
       message Items { 
         enum ItemType { 
           ERR = 0; 
-          TRX = 1; 
+          EARTH = 1; 
           BLOCK = 2; 
           BLOCKHEADER = 3; 
          } 
