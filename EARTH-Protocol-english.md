@@ -1,7 +1,6 @@
 # EARTH protocol
 
-## EARTH's protocol is defined by Google Protobuf. It contains a range of layers, from account, block to transfer.
-
+- Defined by [Google Protobuf](https://developers.google.com/protocol-buffers)
 - There are 3 types of account—basic account, asset release account and contract account, and attributes included in each account are name, types, address, balance and related asset.
 - A basic account is able to apply to be a validation node, which has serval parameters, including extra attributes, public key, URL, voting statistics, history performance, etc.
 
